@@ -59,6 +59,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+
     // ktlint for jetpack compose
     ktlint("com.pinterest:ktlint:0.50.0")
 }

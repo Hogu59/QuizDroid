@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">QuizDroid</string>
+    <string name="date_format">%d년 %d월 %d일</string>
 </resources>

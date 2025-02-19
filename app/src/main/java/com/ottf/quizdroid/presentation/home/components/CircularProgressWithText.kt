@@ -14,9 +14,9 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun CircularProgressWithText(
-    progress: Float, // 0.0 ~ 1.0
-    total: Int = 5, // 전체 문제 개수
-    current: Int = 3, // 현재 완료한 개수
+    progress: Float,
+    total: Int = 5,
+    current: Int = 3,
 ) {
     Box(
         contentAlignment = Alignment.Center,

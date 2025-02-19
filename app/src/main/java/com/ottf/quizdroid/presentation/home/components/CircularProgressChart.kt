@@ -12,10 +12,10 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun CircularProgressChart(
-    progress: Float, // 0.0 ~ 1.0 (진척도)
+    progress: Float,
     modifier: Modifier = Modifier,
-    size: Dp = 120.dp, // 원 크기
-    strokeWidth: Dp = 16.dp, // 두께
+    size: Dp = 120.dp,
+    strokeWidth: Dp = 16.dp,
     progressColor: Color = Color.Blue,
     trackColor: Color = Color.LightGray,
 ) {
@@ -24,7 +24,6 @@ fun CircularProgressChart(
     ) {
         val stroke = Stroke(width = strokeWidth.toPx(), cap = StrokeCap.Butt)
 
-        // 배경 원형 트랙 (전체 원)
         drawArc(
             color = trackColor,
             startAngle = 270f,
@@ -33,11 +32,10 @@ fun CircularProgressChart(
             style = stroke,
         )
 
-        // 진행된 부분 (진척도)
         drawArc(
             color = progressColor,
-            startAngle = 270f, // 12시 방향 시작
-            sweepAngle = 360 * progress, // 진척도 반영
+            startAngle = 270f,
+            sweepAngle = 360 * progress,
             useCenter = false,
             style = stroke,
         )

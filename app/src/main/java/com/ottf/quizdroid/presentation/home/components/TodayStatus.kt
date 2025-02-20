@@ -23,10 +23,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ottf.quizdroid.R
 import com.ottf.quizdroid.ui.theme.Gray400
 import com.ottf.quizdroid.ui.theme.Green100
 import com.ottf.quizdroid.ui.theme.RobotoFontFamily
@@ -34,6 +36,9 @@ import com.ottf.quizdroid.ui.theme.RobotoFontFamily
 @Composable
 fun TodayStatus(
     date: String,
+//    progress: Float,
+//    totalQuestions: Int,
+//    completedQuestions: Int,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -48,7 +53,7 @@ fun TodayStatus(
                 .padding(16.dp),
         ) {
             Text(
-                text = "오늘의 학습",
+                text = stringResource(R.string.todays_learning),
                 color = Color.White,
                 fontSize = 20.sp,
                 fontFamily = RobotoFontFamily,
@@ -78,12 +83,16 @@ fun TodayStatus(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 imageVector = Icons.Default.CheckCircle,
-                                contentDescription = "완료",
+                                contentDescription = stringResource(R.string.completed),
                                 tint = Green100,
                                 modifier = Modifier.size(14.dp),
                             )
                             Spacer(modifier = Modifier.width(4.dp))
-                            Text(text = "완료", fontSize = 14.sp, color = Green100)
+                            Text(
+                                text = stringResource(R.string.completed),
+                                fontSize = 14.sp,
+                                color = Green100,
+                            )
                         }
                     }
                     Box(
@@ -93,7 +102,14 @@ fun TodayStatus(
                             .fillMaxWidth()
                             .padding(top = 16.dp),
                     ) {
-                        CircularProgressWithText(progress = 3 / 7f, total = 7, current = 3)
+                        CircularProgressWithText(
+                            // progress = progress,
+                            // total = totalQuestions,
+                            // current = completedQuestions,
+                            progress = 3 / 7f,
+                            total = 7,
+                            current = 3,
+                        )
                     }
                 }
             }

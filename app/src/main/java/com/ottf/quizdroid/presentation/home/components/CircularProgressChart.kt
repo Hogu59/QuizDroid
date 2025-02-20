@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
@@ -19,6 +20,8 @@ fun CircularProgressChart(
     progressColor: Color = Color.Blue,
     trackColor: Color = Color.LightGray,
 ) {
+    require(progress in 0f..1f) { "Progress must be between 0 and 1" }
+
     Canvas(
         modifier = modifier.size(size),
     ) {
@@ -40,4 +43,10 @@ fun CircularProgressChart(
             style = stroke,
         )
     }
+}
+
+@Preview
+@Composable
+private fun CircularProgressChartPreview() {
+    CircularProgressChart(progress = 0.75f)
 }

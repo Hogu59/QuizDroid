@@ -8,9 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ottf.quizdroid.R
 
 @Composable
 fun CircularProgressWithText(
@@ -26,8 +28,16 @@ fun CircularProgressWithText(
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(text = "$current/$total", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-            Text(text = "문제", fontSize = 14.sp, color = Color.Gray)
+            Text(
+                text = "$current/$total",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+            )
+            Text(
+                text = stringResource(R.string.question_label),
+                fontSize = 14.sp,
+                color = Color.Gray,
+            )
         }
     }
 }

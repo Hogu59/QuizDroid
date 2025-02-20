@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">QuizDroid</string>
-    <string name="date_format">%d년 %d월 %d일</string>
+    <string name="date_format">yyyy년 MM월 dd일</string>
+    <string name="question_label">문제</string>
+    <string name="study_statistics">학습 통계</string>
+    <string name="total_problems">총 문제</string>
+    <string name="consecutive_days">연속 학습</string>
+    <string name="accuray_rate">정답률</string>
+    <string name="todays_learning">오늘의 학습</string>
+    <string name="completed">완료</string>
+    <string name="todays_study">오늘의 학습</string>
 </resources>

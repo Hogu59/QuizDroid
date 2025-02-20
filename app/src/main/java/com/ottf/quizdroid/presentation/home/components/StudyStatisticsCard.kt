@@ -54,7 +54,7 @@ fun StudyStatisticsCard(
             ) {
                 StatisticsItem(title = stringResource(R.string.total_problems), value = "42")
                 StatisticsItem(title = stringResource(R.string.consecutive_days), value = "7")
-                StatisticsItem(title = stringResource(R.string.accuray_rate), value = "85%", isPercentage = true)
+                StatisticsItem(title = stringResource(R.string.accuracy_rate), value = "85%", isPercentage = true)
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -94,8 +94,13 @@ fun StatisticsItem(
 
 @Composable
 fun StudyBarChart(data: List<Int>, modifier: Modifier = Modifier) {
-    val days = listOf("월", "화", "수", "목", "금")
-    val maxHeight = 100.dp // 최대 높이 (비율 조정)
+    val days = listOf(
+        stringResource(R.string.monday),
+        stringResource(R.string.tuesday),
+        stringResource(R.string.wednesday),
+        stringResource(R.string.thursday),
+        stringResource(R.string.friday),
+    )
 
     Row(
         modifier = modifier.fillMaxWidth(),

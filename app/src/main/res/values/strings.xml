@@ -5,8 +5,13 @@
     <string name="study_statistics">학습 통계</string>
     <string name="total_problems">총 문제</string>
     <string name="consecutive_days">연속 학습</string>
-    <string name="accuray_rate">정답률</string>
+    <string name="accuracy_rate">정답률</string>
     <string name="todays_learning">오늘의 학습</string>
     <string name="completed">완료</string>
-    <string name="todays_study">오늘의 학습</string>
+    <string name="daily_question">오늘의 문제</string>
+    <string name="monday">월</string>
+    <string name="tuesday">화</string>
+    <string name="wednesday">수</string>
+    <string name="thursday">목</string>
+    <string name="friday">금</string>
 </resources>

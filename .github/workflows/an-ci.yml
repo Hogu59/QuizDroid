@@ -26,13 +26,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
 
       - name: Cache Gradle Home
-        uses: actions/cache@v3
+        uses: actions/cache@v3.1.0
         with:
           path: ~/.gradle
           key: gradle-home-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}

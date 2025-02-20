@@ -17,16 +17,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ottf.quizdroid.R
 import com.ottf.quizdroid.domain.Quiz
-import com.ottf.quizdroid.ui.theme.RobotoFontFamily
+import com.ottf.quizdroid.ui.theme.CustomTypography
 
 @Composable
 fun QuestionCard(
-    quiz: Quiz? = null,
+    quiz: Quiz?,
     onChallenge: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -41,11 +43,9 @@ fun QuestionCard(
                 .padding(16.dp),
         ) {
             Text(
-                text = "오늘의 문제",
-                fontSize = 18.sp,
+                text = stringResource(R.string.daily_question),
                 color = Color.Black,
-                fontFamily = RobotoFontFamily,
-                fontWeight = FontWeight.Bold,
+                style = CustomTypography.titleMedium,
             )
 
             Box(
@@ -96,7 +96,8 @@ fun QuestionCard(
                     Button(
                         onClick = { onChallenge() },
                         colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .fillMaxWidth()
                             .padding(top = 12.dp),
                         shape = RoundedCornerShape(8.dp),
                     ) {
@@ -116,6 +117,7 @@ fun QuestionCard(
 @Composable
 private fun QuestionCardPreview() {
     QuestionCard(
+        quiz = null,
         onChallenge = { /* TODO: 문제 풀기 액션 */ },
     )
 }

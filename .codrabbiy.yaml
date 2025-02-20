@@ -15,3 +15,6 @@ review:
   test_coverage:
     enabled: false  # 테스트 커버리지 확인 여부 (필요 시 true)
   review_status: false
+language: "ko-KR"
+chat:
+  auto_reply: true

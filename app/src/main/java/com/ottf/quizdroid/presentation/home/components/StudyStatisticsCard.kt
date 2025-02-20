@@ -18,10 +18,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ottf.quizdroid.R
 
 @Composable
 fun StudyStatisticsCard(
@@ -39,7 +41,7 @@ fun StudyStatisticsCard(
         ) {
             // 타이틀
             Text(
-                text = "학습 통계",
+                text = stringResource(R.string.study_statistics),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
             )
@@ -50,9 +52,9 @@ fun StudyStatisticsCard(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
-                StatisticsItem(title = "총 문제", value = "42")
-                StatisticsItem(title = "연속 학습", value = "7")
-                StatisticsItem(title = "정답률", value = "85%", isPercentage = true)
+                StatisticsItem(title = stringResource(R.string.total_problems), value = "42")
+                StatisticsItem(title = stringResource(R.string.consecutive_days), value = "7")
+                StatisticsItem(title = stringResource(R.string.accuray_rate), value = "85%", isPercentage = true)
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -73,7 +75,9 @@ fun StatisticsItem(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
-        modifier = modifier.width(93.dp).height(52.dp),
+        modifier = modifier
+            .width(93.dp)
+            .height(52.dp),
     ) {
         Text(
             text = value,

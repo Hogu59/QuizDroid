@@ -1,6 +1,8 @@
 review:
   enabled: true  # 코드 리뷰 활성화 여부
   auto_review: true  # PR 생성 시 자동 코드 리뷰 수행 여부
+  base_branches:
+    - "*"  # 모든 브랜치에서 자동 리뷰 수행
   approve_small_changes: true  # 작은 변경 사항 자동 승인
   exclude_files:  # 리뷰에서 제외할 파일 목록
     - "*.md"
@@ -12,3 +14,4 @@ review:
     enabled: true  # 보안 검사 활성화 여부
   test_coverage:
     enabled: false  # 테스트 커버리지 확인 여부 (필요 시 true)
+  review_status: false

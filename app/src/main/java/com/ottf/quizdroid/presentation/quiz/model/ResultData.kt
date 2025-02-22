@@ -2,7 +2,6 @@ package com.ottf.quizdroid.presentation.quiz.model
 
 import androidx.compose.ui.graphics.Color
 
-
 data class ResultData(
     val text: String,
     val textColor: Color,

@@ -45,7 +45,7 @@ jobs:
         run: ./gradlew --version
 
       - name: Verify Gradle Wrapper Integrity
-        run: ./gradlew wrapper --gradle-version
+        run: ./gradlew wrapper --gradle-version 7.4.2
 
       - name: Run Ktlint
         run: ./gradlew ktlintCheck --no-daemon

@@ -66,6 +66,7 @@ fun HomeScreen(
             )
 
             QuestionCard(
+                quiz = state.quiz,
                 onChallenge = { onAction(HomeAction.OnNavigateToQuiz) },
                 modifier = Modifier
                     .padding(16.dp)

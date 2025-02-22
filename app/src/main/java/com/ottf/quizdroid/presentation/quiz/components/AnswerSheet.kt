@@ -36,12 +36,12 @@ fun AnswerSheet(
         Column(
             modifier = Modifier.padding(16.dp),
         ) {
-            Result(answer == selectedOption)
+            AnswerResult(answer == selectedOption)
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "정답: A",
+                text = "정답: ${('A' + answer - 1)}",
                 style = CustomTypography.titleSmall,
             )
 

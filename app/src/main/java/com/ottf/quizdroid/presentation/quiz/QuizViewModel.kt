@@ -26,9 +26,11 @@ class QuizViewModel : ViewModel() {
             is QuizAction.OnSubmitAnswer -> {
                 _state.value = _state.value.copy(isShowAnswer = true)
             }
+
             is QuizAction.OnSelectOption -> {
                 _state.value = _state.value.copy(selectedOption = action.option)
             }
+
             is QuizAction.OnNavigateBack -> {
             }
         }
@@ -36,13 +38,20 @@ class QuizViewModel : ViewModel() {
 
     private fun fetchQuiz() {
         viewModelScope.launch {
-            // 예시: 1초 후에 퀴즈 데이터를 업데이트함
-            delay(1000L)
-            _state.value = _state.value.copy(
-                quiz = Quiz.SAMPLE_QUIZ,
-                isLoading = false,
-                selectedOption = _state.value.selectedOption,
-            )
+            try {
+                _state.value = _state.value.copy(isLoading = true)
+                // TODO: Replace with actual API call
+                delay(1000L)
+                val quiz = Quiz.SAMPLE_QUIZ
+                _state.value = _state.value.copy(
+                    quiz = quiz,
+                    isLoading = false,
+                    selectedOption = _state.value.selectedOption,
+                )
+            } catch (e: Exception) {
+                _state.value = _state.value.copy(isLoading = false)
+                println("Failed to fetch quiz: $e")
+            }
         }
     }
 }

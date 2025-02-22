@@ -45,7 +45,6 @@ private fun QuizScreen(
     onAction: (QuizAction) -> Unit,
 ) {
     val quiz = state.quiz
-    println("is Selected : ${state.selectedOption}")
 
     Scaffold(
         topBar = {

@@ -11,6 +11,12 @@ data class Quiz(
     val answer: Int,
     val description: List<String>,
 ) {
+    init {
+        require(answer == -1 || (answer in 1..options.size)) {
+            "Answer index must be -1 or within options range (1..${options.size})"
+        }
+    }
+
     companion object {
         val EMPTY = Quiz(
             id = -1L,

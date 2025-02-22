@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -24,14 +25,14 @@ import com.ottf.quizdroid.ui.theme.Red100
 import com.ottf.quizdroid.ui.theme.Red500
 
 @Composable
-fun Result(
+fun AnswerResult(
     isCorrect: Boolean,
     modifier: Modifier = Modifier,
 ) {
     val resultData = if (isCorrect) {
-        ResultData("정답입니다", Green100, R.drawable.ic_check, 13.0, Green40)
+        ResultData(stringResource(R.string.result_correct), Green100, R.drawable.ic_check, 13.0, Green40)
     } else {
-        ResultData("오답입니다", Red500, R.drawable.ic_x, 10.0, Red100)
+        ResultData(stringResource(R.string.result_wrong), Red500, R.drawable.ic_x, 10.0, Red100)
     }
 
     Row(

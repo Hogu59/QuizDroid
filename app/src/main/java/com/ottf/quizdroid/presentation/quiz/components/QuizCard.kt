@@ -13,10 +13,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ottf.quizdroid.R
 import com.ottf.quizdroid.domain.Quiz
 
 @Composable
@@ -48,7 +50,7 @@ fun QuizCard(
             }
 
             Text(
-                text = if (isLoading) "문제를 불러오는 중입니다." else quiz.title,
+                text = if (isLoading) stringResource(R.string.loading_quiz) else quiz.title,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(top = 8.dp),
@@ -62,7 +64,7 @@ fun QuizCard(
             )
 
             Spacer(modifier = Modifier.height(8.dp))
-            // 객관식 보기 리스트
+
             if (!isLoading) {
                 quiz.let {
                     it.options.forEachIndexed { index, option ->

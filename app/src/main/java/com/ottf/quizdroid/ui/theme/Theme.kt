@@ -44,9 +44,14 @@ val CustomTypography = Typography(
         fontWeight = FontWeight.Bold,
         fontSize = 18.sp,
     ),
+    titleSmall = TextStyle(
+        fontFamily = RobotoFontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 16.sp,
+    ),
     labelMedium = TextStyle(
         fontFamily = RobotoFontFamily,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Bold,
         fontSize = 14.sp,
     ),
 )

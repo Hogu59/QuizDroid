@@ -17,9 +17,6 @@ permissions:
 jobs:
   ktlint_check:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./android
 
     steps:
       - name: Checkout code

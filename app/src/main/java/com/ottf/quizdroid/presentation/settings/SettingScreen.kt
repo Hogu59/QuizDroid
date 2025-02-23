@@ -103,7 +103,7 @@ fun SettingsScreen(
                         SettingListItem(
                             title = "이용약관",
                             onClick = { TODO() },
-                        ) 
+                        )
                         HorizontalDivider(
                             thickness = 0.5.dp,
                         )

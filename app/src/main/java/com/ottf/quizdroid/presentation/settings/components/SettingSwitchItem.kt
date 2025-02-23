@@ -37,7 +37,7 @@ fun SettingSwitchItem(
     ) {
         val animatedChecked by animateFloatAsState(
             targetValue = if (checked) 1f else 0f,
-            animationSpec = tween(durationMillis = 500), // 애니메이션 속도 조절 (500ms)
+            animationSpec = tween(durationMillis = 500),
         )
         Text(
             text = title,

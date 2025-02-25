@@ -23,7 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ottf.quizdroid.R
-import com.ottf.quizdroid.domain.Quiz
+import com.ottf.quizdroid.domain.model.Quiz
 import com.ottf.quizdroid.ui.theme.CustomTypography
 
 @Composable

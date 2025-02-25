@@ -14,6 +14,7 @@ review:
     enabled: true  # 보안 검사 활성화 여부
   test_coverage:
     enabled: false  # 테스트 커버리지 확인 여부 (필요 시 true)
-  review_status: false
+  review_status: true
+  review_profile: STRICT
 chat:
   auto_reply: true

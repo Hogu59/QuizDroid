@@ -1,4 +1,4 @@
-package com.ottf.quizdroid.domain
+package com.ottf.quizdroid.domain.model
 
 data class Quiz(
     val id: Long,

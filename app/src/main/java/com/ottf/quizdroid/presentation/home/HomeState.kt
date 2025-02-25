@@ -1,6 +1,6 @@
 package com.ottf.quizdroid.presentation.home
 
-import com.ottf.quizdroid.domain.Quiz
+import com.ottf.quizdroid.domain.model.Quiz
 
 data class HomeState(
     val isLoading: Boolean = true,

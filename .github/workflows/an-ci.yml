@@ -29,7 +29,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Cache Gradle Home
-        uses: actions/cache@v3.0
+        uses: actions/cache@v3
         with:
           path: ~/.gradle
           key: gradle-home-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
@@ -65,7 +65,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Cache Gradle Home
-        uses: actions/cache@v3.0
+        uses: actions/cache@v3
         with:
           path: ~/.gradle
           key: gradle-home-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}

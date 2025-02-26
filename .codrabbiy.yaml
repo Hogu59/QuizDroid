@@ -1,3 +1,4 @@
+language:  "ko-KR"
 review:
   enabled: true  # 코드 리뷰 활성화 여부
   auto_review: true  # PR 생성 시 자동 코드 리뷰 수행 여부
@@ -15,7 +16,6 @@ review:
   test_coverage:
     enabled: false  # 테스트 커버리지 확인 여부 (필요 시 true)
   review_status: true
-  review_profile: STRICT
-  language:  "ko-KR"
+  profile: STRICT
 chat:
   auto_reply: true

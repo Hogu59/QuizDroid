@@ -1,6 +1,6 @@
 package com.ottf.quizdroid.presentation.quiz
 
-import com.ottf.quizdroid.domain.Quiz
+import com.ottf.quizdroid.domain.model.Quiz
 
 data class QuizState(
     val isLoading: Boolean = true,

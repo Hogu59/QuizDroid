@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.ottf.quizdroid.domain.Quiz
+import com.ottf.quizdroid.domain.model.Quiz
 import com.ottf.quizdroid.presentation.quiz.components.AnswerSheet
 import com.ottf.quizdroid.presentation.quiz.components.QuizCard
 import com.ottf.quizdroid.presentation.quiz.components.QuizTopBar

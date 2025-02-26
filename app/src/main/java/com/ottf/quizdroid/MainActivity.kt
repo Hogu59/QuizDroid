@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
@@ -13,7 +14,9 @@ import com.ottf.quizdroid.presentation.home.HomeViewModel
 import com.ottf.quizdroid.presentation.quiz.QuizScreenRoot
 import com.ottf.quizdroid.presentation.quiz.QuizViewModel
 import com.ottf.quizdroid.ui.theme.QuizDroidTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +32,7 @@ class MainActivity : ComponentActivity() {
                         startDestination = Route.Home,
                     ) {
                         composable<Route.Home> {
-                            val viewModel = HomeViewModel()
+                            val viewModel: HomeViewModel = hiltViewModel()
                             HomeScreenRoot(
                                 viewModel = viewModel,
                                 onNavigateToQuiz = {
@@ -38,7 +41,7 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable<Route.Quiz> {
-                            val viewModel = QuizViewModel()
+                            val viewModel: QuizViewModel = hiltViewModel()
                             QuizScreenRoot(
                                 viewModel = viewModel,
                                 onNavigateBack = {

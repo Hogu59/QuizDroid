@@ -16,5 +16,5 @@ interface DataSourceModule {
     fun bindQuizDataSource(defaultQuizDataSource: DefaultQuizDataSource): QuizDataSource
 
     @Binds
-    fun bindRecordDataSource(defaultRecordDataSource: LocalRecordDataSource): RecordDataSource
+    fun bindRecordDataSource(localRecordDataSource: LocalRecordDataSource): RecordDataSource
 }

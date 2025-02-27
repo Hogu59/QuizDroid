@@ -16,6 +16,10 @@ class QuizConverter(private val gson: Gson) {
     @TypeConverter
     fun toQuiz(quizJson: String): Quiz {
         val type = object : TypeToken<Quiz>() {}.type
-        return gson.fromJson(quizJson, type)
+        return try {
+            gson.fromJson(quizJson, type)
+        } catch (e: Exception) {
+            throw IllegalArgumentException("Invalid quiz JSON: $quizJson", e)
+        }
     }
 }

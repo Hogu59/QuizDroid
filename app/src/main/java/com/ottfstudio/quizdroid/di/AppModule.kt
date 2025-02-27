@@ -34,6 +34,7 @@ object AppModule {
             "quiz_database",
         )
             .addTypeConverter(quizConverter)
+            .addMigrations()
             .build()
     }
 

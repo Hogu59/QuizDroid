@@ -1,7 +1,7 @@
 package com.ottfstudio.quizdroid.di
 
 import com.ottfstudio.quizdroid.BuildConfig
-import com.ottfstudio.quizdroid.data.api.QuizService
+import com.ottfstudio.quizdroid.data.remote.api.QuizService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,4 +1,4 @@
-package com.ottfstudio.quizdroid.data.api
+package com.ottfstudio.quizdroid.data.remote.api
 
 import com.ottfstudio.quizdroid.BuildConfig
 import com.ottfstudio.quizdroid.data.model.QuizResponse

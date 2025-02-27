@@ -6,7 +6,7 @@ branches:
     prefix: an/feat/
 autoLinkIssue: true
 autoCloseIssue: true
-openPR: true
+openPR: false
 copyIssueDescriptionToPR: true
 copyIssueLabelsToPR: true
 copyIssueAssigneeToPR: true

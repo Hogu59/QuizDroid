@@ -16,5 +16,5 @@ interface RepositoryModule {
     fun bindQuizRepository(defaultQuizRepository: DefaultQuizRepository): QuizRepository
 
     @Binds
-    fun bindRecordRepository(defaultRecordRepository: LocalRecordRepository): RecordRepository
+    fun bindRecordRepository(localRecordRepository: LocalRecordRepository): RecordRepository
 }

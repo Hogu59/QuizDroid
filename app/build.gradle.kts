@@ -18,11 +18,11 @@ android {
     }
     properties.load(FileInputStream(localPropertiesFile))
 
-    namespace = "com.ottf.quizdroid"
+    namespace = "com.ottfstudio.quizdroid"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.ottf.quizdroid"
+        applicationId = "com.ottfstudio.quizdroid"
         minSdk = 28
         targetSdk = 35
         versionCode = 1

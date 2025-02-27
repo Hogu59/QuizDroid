@@ -64,14 +64,15 @@ class QuizViewModel
         }
 
         private fun fetchToday(): String {
-            try {
+            return try {
                 val currentDate = LocalDate.now()
                 val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
                 val formattedDate = currentDate.format(formatter)
-                return formattedDate
+                require(formattedDate.isNotBlank()) { "Formatted date is blank" }
+                formattedDate
             } catch (e: Exception) {
-                Log.e("HomeViewModel", "Error fetching today", e)
+                Log.e("QuizViewModel", "Error fetching today", e)
+                throw IllegalStateException("Error fetching today", e)
             }
-            return ""
         }
     }

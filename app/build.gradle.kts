@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -8,6 +11,9 @@ plugins {
 }
 
 android {
+    val properties = Properties()
+    properties.load(FileInputStream(rootProject.file("local.properties")))
+
     namespace = "com.ottf.quizdroid"
     compileSdk = 35
 
@@ -19,6 +25,17 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            "String",
+            "API_KEY",
+            properties.getProperty("api_key"),
+        )
+        buildConfigField(
+            "String",
+            "TABLE_NAME",
+            properties.getProperty("table_name"),
+        )
     }
 
     buildTypes {
@@ -28,6 +45,23 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
+            buildConfigField(
+                "String",
+                "BASE_URL",
+                properties.getProperty("base_url_release"),
+            )
+            signingConfig = signingConfigs.getByName("debug")
+//            signingConfig = signingConfigs.getByName("release")
+        }
+
+        debug {
+            isMinifyEnabled = false
+            buildConfigField(
+                "String",
+                "BASE_URL",
+                properties.getProperty("base_url_dev"),
+            )
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
@@ -38,6 +72,7 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
     kapt {
@@ -76,4 +111,10 @@ dependencies {
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    // Retrofit2
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    // implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation(libs.logging.interceptor)
 }

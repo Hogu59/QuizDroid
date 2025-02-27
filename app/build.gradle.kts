@@ -12,7 +12,11 @@ plugins {
 
 android {
     val properties = Properties()
-    properties.load(FileInputStream(rootProject.file("local.properties")))
+    val localPropertiesFile = rootProject.file("local.properties")
+    if (!localPropertiesFile.exists()) {
+        throw GradleException("Missing local.properties file.")
+    }
+    properties.load(FileInputStream(localPropertiesFile))
 
     namespace = "com.ottf.quizdroid"
     compileSdk = 35

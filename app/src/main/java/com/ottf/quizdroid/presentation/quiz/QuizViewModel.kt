@@ -3,7 +3,7 @@ package com.ottf.quizdroid.presentation.quiz
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ottf.quizdroid.data.repository.DefaultQuizRepository
+import com.ottf.quizdroid.domain.repository.QuizRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -17,7 +17,7 @@ import javax.inject.Inject
 class QuizViewModel
     @Inject
     constructor(
-        private val quizRepository: DefaultQuizRepository,
+        private val quizRepository: QuizRepository,
     ) : ViewModel() {
         private var _state = MutableStateFlow(QuizState())
         val state = _state.stateIn(

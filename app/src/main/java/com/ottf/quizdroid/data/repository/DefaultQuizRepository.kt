@@ -1,6 +1,6 @@
 package com.ottf.quizdroid.data.repository
 
-import com.ottf.quizdroid.data.datasource.DefaultQuizDataSource
+import com.ottf.quizdroid.data.datasource.QuizDataSource
 import com.ottf.quizdroid.data.model.QuizResponse
 import com.ottf.quizdroid.domain.model.Quiz
 import com.ottf.quizdroid.domain.repository.QuizRepository
@@ -11,10 +11,15 @@ import javax.inject.Singleton
 class DefaultQuizRepository
     @Inject
     constructor(
-        private val dataSource: DefaultQuizDataSource,
+        private val dataSource: QuizDataSource,
     ) : QuizRepository {
         override suspend fun fetchTodayQuiz(date: String): Quiz {
-            return dataSource.fetchTodayQuiz(date).first().toDomain()
+            val quizzes = dataSource.fetchTodayQuiz(date)
+            return if (quizzes.isNotEmpty()) {
+                quizzes.first().toDomain()
+            } else {
+                throw NoSuchElementException("오늘의 퀴즈를 찾을 수 없습니다: $date")
+            }
         }
     }
 

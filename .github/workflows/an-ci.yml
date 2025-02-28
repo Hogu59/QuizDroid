@@ -61,7 +61,7 @@ jobs:
         run: ./gradlew wrapper --gradle-version 8.10.2
 
       - name: Run Ktlint
-        run: ./gradlew ktlintCheck --no-daemon
+        run: ./gradlew ktlintCheck
 
   build_test:
     runs-on: ubuntu-latest

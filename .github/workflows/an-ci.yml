@@ -29,33 +29,31 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
 
       - name: Set up environment variable for BuildConfig
         run: |
-          echo api_key=\"$API_KEY\" > ./local.properties
-          echo base_url_dev=\"$BASE_URL_DEV\" >> ./local.properties
-          echo base_url_release=\"$BASE_URL_API\" >> ./local.properties
-          echo table_name=\"$TABLE_NAME\" >> ./local.properties
+          echo "api_key=${{ secrets.API_KEY }}" > local.properties
+          echo "base_url_dev=${{ secrets.BASE_URL_DEV }}" >> local.properties
+          echo "base_url_release=${{ secrets.BASE_URL_API }}" >> local.properties
+          echo "table_name=${{ secrets.TABLE_NAME }}" >> local.properties
+          cat local.properties
 
-      - name: Cache Gradle Home
+      - name: Cache Gradle dependencies
         uses: actions/cache@v3
         with:
-          path: ~/.gradle
-          key: gradle-home-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: gradle-home-${{ runner.os }}-
-
-      - name: Verify Gradle Cache Integrity
-        run: ls -lah ~/.gradle || echo "Gradle cache not found."
+          path: |
+            ~/.gradle/caches/modules-2
+            ~/.gradle/caches/jars-3
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: gradle-${{ runner.os }}-
 
       - name: Grant execute permission for Gradle
         run: chmod +x ./gradlew
-
-      - name: Verify Gradle Wrapper Version
-        run: ./gradlew --version
 
       - name: Run Ktlint
         run: ./gradlew ktlintCheck --no-daemon
@@ -69,37 +67,35 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Set up environment variable for BuildConfig
+      - name: Set up environment variables
         run: |
-          echo api_key=\"$API_KEY\" > ./local.properties
-          echo base_url_dev=\"$BASE_URL_DEV\" >> ./local.properties
-          echo base_url_release=\"$BASE_URL_API\" >> ./local.properties
-          echo table_name=\"$TABLE_NAME\" >> ./local.properties
+          echo "api_key=${{ secrets.API_KEY }}" > local.properties
+          echo "base_url_dev=${{ secrets.BASE_URL_DEV }}" >> local.properties
+          echo "base_url_release=${{ secrets.BASE_URL_API }}" >> local.properties
+          echo "table_name=${{ secrets.TABLE_NAME }}" >> local.properties
+          cat local.properties
 
       - name: Grant execute permission for Gradle
         run: chmod +x ./gradlew
 
-      - name: Verify Gradle Cache Integrity
-        run: ls -lah ~/.gradle || echo "Gradle cache not found."
-
-      - name: Verify Gradle Wrapper Version
-        run: ./gradlew --version 8.10.2
-
-#      - name: Cache Gradle Home
-#        uses: actions/cache@v3
-#        with:
-#          path: ~/.gradle
-#          key: gradle-home-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-#          restore-keys: gradle-home-${{ runner.os }}-
+      - name: Configure Gradle Properties
+        run: |
+          echo "org.gradle.parallel=false" >> gradle.properties
+          echo "org.gradle.daemon=false" >> gradle.properties
+          echo "org.gradle.jvmargs=-Xmx2g" >> gradle.properties
 
       - name: Build and Test
-        run: ./gradlew build test --info --stacktrace
+        run: ./gradlew build --info --stacktrace
 
       - name: Clean Gradle Cache if Build Fails
         if: failure()
-        run: rm -rf ~/.gradle/caches/modules-2 && rm -rf ~/.gradle/caches/jars-3
+        run: |
+          ./gradlew --stop
+          ./gradlew clean
+          rm -rf ~/.gradle/caches/modules-2
+          rm -rf ~/.gradle/caches/jars-3

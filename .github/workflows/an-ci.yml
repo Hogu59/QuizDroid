@@ -84,18 +84,18 @@ jobs:
           echo base_url_release=\"$BASE_URL_API\" >> ./local.properties
           echo table_name=\"$TABLE_NAME\" >> ./local.properties
 
+      - name: Grant execute permission for Gradle
+        run: chmod +x ./gradlew
+
+      - name: Verify Gradle Wrapper Version
+        run: ./gradlew --version
+
       - name: Cache Gradle Home
         uses: actions/cache@v3
         with:
           path: ~/.gradle
           key: gradle-home-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: gradle-home-${{ runner.os }}-
-
-      - name: Grant execute permission for Gradle
-        run: chmod +x ./gradlew
-
-      - name: Verify Gradle Wrapper Version
-        run: ./gradlew --version
 
       - name: Build and Test
         run: ./gradlew build test

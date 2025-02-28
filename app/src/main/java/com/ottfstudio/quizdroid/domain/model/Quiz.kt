@@ -43,7 +43,7 @@ data class Quiz(
                 "스코프와 컨텍스트는 동일한 개념으로 혼용된다.",
                 "둘 다 코루틴의 생명주기만을 관리한다.",
             ),
-            answer = -1,
+            answer = 1,
             description = listOf(
                 "코루틴 스코프(CoroutineScope)와 코루틴 컨텍스트(CoroutineContext)는 서로 다른 역할을 합니다.",
                 "1. 코루틴 스코프:\n코루틴의 실행 범위를 정의\n코루틴의 생명주기 관리\n취소 및 예외 처리 담당\n",

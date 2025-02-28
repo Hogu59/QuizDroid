@@ -1,7 +1,8 @@
-package com.ottfstudio.quizdroid.data.datasource
+package com.ottfstudio.quizdroid.data.remote
 
-import com.ottfstudio.quizdroid.data.api.QuizService
+import com.ottfstudio.quizdroid.data.datasource.QuizDataSource
 import com.ottfstudio.quizdroid.data.model.QuizResponse
+import com.ottfstudio.quizdroid.data.remote.api.QuizService
 import javax.inject.Inject
 import javax.inject.Singleton
 

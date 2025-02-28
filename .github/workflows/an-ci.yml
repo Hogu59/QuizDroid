@@ -58,7 +58,7 @@ jobs:
         run: ./gradlew --version
 
       - name: Verify Gradle Wrapper Integrity
-        run: ./gradlew wrapper --gradle-version
+        run: ./gradlew wrapper --gradle-version 8.10.2
 
       - name: Run Ktlint
         run: ./gradlew ktlintCheck --no-daemon
@@ -99,3 +99,7 @@ jobs:
 
       - name: Build and Test
         run: ./gradlew build test --info --stacktrace
+
+      - name: Clean Gradle Cache if Build Fails
+        if: failure()
+        run: rm -rf ~/.gradle/caches/modules-2 && rm -rf ~/.gradle/caches/jars-3

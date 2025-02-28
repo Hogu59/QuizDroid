@@ -91,7 +91,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Verify Gradle Wrapper Version
-        run: ./gradlew --version
+        run: ./gradlew --version 8.10.2
 
       - name: Cache Gradle Home
         uses: actions/cache@v3

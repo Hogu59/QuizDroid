@@ -29,12 +29,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ottfstudio.quizdroid.presentation.settings.components.ProfileCard
 import com.ottfstudio.quizdroid.presentation.settings.components.SettingCard
 import com.ottfstudio.quizdroid.presentation.settings.components.SettingInfoItem
 import com.ottfstudio.quizdroid.presentation.settings.components.SettingListItem
-import com.ottfstudio.quizdroid.presentation.settings.components.SettingSwitchItem
-import com.ottfstudio.quizdroid.presentation.settings.model.UserProfile
 import com.ottfstudio.quizdroid.ui.theme.Gray100
 
 @Composable

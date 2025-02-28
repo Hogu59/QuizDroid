@@ -9,6 +9,12 @@ plugins {
     kotlin("plugin.serialization") version "1.9.22"
 }
 
+buildscript {
+    dependencies {
+        classpath(libs.oss.licenses.plugin)
+    }
+}
+
 allprojects {
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
 }

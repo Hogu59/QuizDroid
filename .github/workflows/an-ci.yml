@@ -68,9 +68,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Clean Gradle Cache
-        run: rm -rf ~/.gradle/caches/modules-2 && rm -rf ~/.gradle/caches/jars-3
-
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -93,12 +90,12 @@ jobs:
       - name: Verify Gradle Wrapper Version
         run: ./gradlew --version 8.10.2
 
-      - name: Cache Gradle Home
-        uses: actions/cache@v3
-        with:
-          path: ~/.gradle
-          key: gradle-home-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: gradle-home-${{ runner.os }}-
+#      - name: Cache Gradle Home
+#        uses: actions/cache@v3
+#        with:
+#          path: ~/.gradle
+#          key: gradle-home-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+#          restore-keys: gradle-home-${{ runner.os }}-
 
       - name: Build and Test
         run: ./gradlew build test --info --stacktrace

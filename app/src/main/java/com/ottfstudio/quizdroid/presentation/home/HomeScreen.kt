@@ -25,6 +25,7 @@ import com.ottfstudio.quizdroid.ui.theme.QuizDroidTheme
 fun HomeScreenRoot(
     viewModel: HomeViewModel,
     onNavigateToQuiz: () -> Unit,
+    onNavigateToSettings: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -33,6 +34,7 @@ fun HomeScreenRoot(
         onAction = { action ->
             when (action) {
                 is HomeAction.OnNavigateToQuiz -> onNavigateToQuiz()
+                is HomeAction.OnNavigateToSettings -> onNavigateToSettings()
                 else -> Unit
             }
             viewModel.onAction(action)
@@ -58,6 +60,7 @@ fun HomeScreen(
             // 오늘의 학습 섹션
             TodayStatus(
                 date = state.today,
+                onNavigateToSettings = { onAction(HomeAction.OnNavigateToSettings) },
                 modifier = Modifier.shadow(
                     elevation = 8.dp,
                     shape = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp),

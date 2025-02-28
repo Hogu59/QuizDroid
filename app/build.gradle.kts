@@ -41,11 +41,10 @@ android {
             "TABLE_NAME",
             properties.getProperty("table_name"),
         )
-    }
 
-    composeCompiler {
-        reportsDestination = layout.buildDirectory.dir("compose_compiler")
-        stabilityConfigurationFile = rootProject.layout.projectDirectory.file("stability_config.conf")
+        composeOptions {
+            kotlinCompilerExtensionVersion = "1.4.3"
+        }
     }
 
     testOptions {

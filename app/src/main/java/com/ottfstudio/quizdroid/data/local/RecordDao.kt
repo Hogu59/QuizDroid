@@ -6,6 +6,9 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.ottfstudio.quizdroid.data.model.entity.QuizRecord
 
+// TODO: 테이블 분리 고민해볼 것
+// https://github.com/Hogu59/QuizDroid/pull/21#discussion_r1973712499
+
 @Dao
 interface RecordDao {
     @Insert(onConflict = OnConflictStrategy.ABORT)

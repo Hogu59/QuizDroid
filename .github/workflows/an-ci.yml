@@ -58,7 +58,7 @@ jobs:
         run: ./gradlew --version
 
       - name: Verify Gradle Wrapper Integrity
-        run: ./gradlew wrapper --gradle-version 8.10.2
+        run: ./gradlew wrapper --gradle-version
 
       - name: Run Ktlint
         run: ./gradlew ktlintCheck --no-daemon
@@ -98,4 +98,4 @@ jobs:
           restore-keys: gradle-home-${{ runner.os }}-
 
       - name: Build and Test
-        run: ./gradlew build test
+        run: ./gradlew build test --info --stacktrace

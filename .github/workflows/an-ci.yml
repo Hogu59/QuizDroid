@@ -71,6 +71,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Clean Gradle Cache
+        run: rm -rf ~/.gradle/caches/modules-2 && rm -rf ~/.gradle/caches/jars-3
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:

@@ -1,5 +1,6 @@
 package com.ottfstudio.quizdroid
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,10 +10,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.ottfstudio.quizdroid.presentation.home.HomeScreenRoot
 import com.ottfstudio.quizdroid.presentation.home.HomeViewModel
 import com.ottfstudio.quizdroid.presentation.quiz.QuizScreenRoot
 import com.ottfstudio.quizdroid.presentation.quiz.QuizViewModel
+import com.ottfstudio.quizdroid.presentation.settings.SettingsScreen
 import com.ottfstudio.quizdroid.ui.theme.QuizDroidTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,9 +38,8 @@ class MainActivity : ComponentActivity() {
                             val viewModel: HomeViewModel = hiltViewModel()
                             HomeScreenRoot(
                                 viewModel = viewModel,
-                                onNavigateToQuiz = {
-                                    navController.navigate(Route.Quiz)
-                                },
+                                onNavigateToQuiz = { navController.navigate(Route.Quiz) },
+                                onNavigateToSettings = { navController.navigate(Route.Settings) },
                             )
                         }
                         composable<Route.Quiz> {
@@ -46,6 +48,18 @@ class MainActivity : ComponentActivity() {
                                 viewModel = viewModel,
                                 onNavigateBack = {
                                     navController.navigateUp()
+                                },
+                            )
+                        }
+                        composable<Route.Settings> {
+                            SettingsScreen(
+                                onBackPress = {
+                                    navController.navigateUp()
+                                },
+                                onClickOss = {
+                                    startActivity(
+                                        Intent(this@MainActivity, OssLicensesMenuActivity::class.java),
+                                    )
                                 },
                             )
                         }

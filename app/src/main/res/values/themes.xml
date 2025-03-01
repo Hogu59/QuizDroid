@@ -2,4 +2,8 @@
 <resources>
 
     <style name="Theme.QuizDroid" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="OSSTheme" parent="Theme.AppCompat.DayNight">
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
 </resources>

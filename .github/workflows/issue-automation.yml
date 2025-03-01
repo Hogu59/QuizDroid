@@ -12,6 +12,7 @@ jobs:
         uses: robvanderleek/create-issue-branch@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPEN_PR: false
 
   suggest-pr:
     runs-on: ubuntu-latest

@@ -1,6 +1,7 @@
 package com.ottfstudio.quizdroid.presentation.home.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -26,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ottfstudio.quizdroid.R
@@ -39,6 +42,7 @@ fun TodayStatus(
 //    progress: Float,
 //    totalQuestions: Int,
 //    completedQuestions: Int,
+    onNavigateToSettings: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -52,13 +56,28 @@ fun TodayStatus(
                 .fillMaxWidth()
                 .padding(16.dp),
         ) {
-            Text(
-                text = stringResource(R.string.todays_learning),
-                color = Color.White,
-                fontSize = 20.sp,
-                fontFamily = RobotoFontFamily,
-                fontWeight = FontWeight.Bold,
-            )
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(
+                    text = stringResource(R.string.todays_learning),
+                    color = Color.White,
+                    fontSize = 20.sp,
+                    fontFamily = RobotoFontFamily,
+                    fontWeight = FontWeight.Bold,
+                )
+
+                Icon(
+                    imageVector = Icons.Default.Settings,
+                    contentDescription = "설정",
+                    tint = Color.White,
+                    modifier = Modifier
+                        .size(24.dp)
+                        .clickable { onNavigateToSettings() },
+                )
+            }
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -115,4 +134,13 @@ fun TodayStatus(
             }
         }
     }
+}
+
+@Preview
+@Composable
+private fun TodayStatusPreview() {
+    TodayStatus(
+        date = "2025년 3월 10일",
+        onNavigateToSettings = {},
+    )
 }

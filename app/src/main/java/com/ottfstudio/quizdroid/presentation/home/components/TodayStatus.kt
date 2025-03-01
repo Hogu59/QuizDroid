@@ -71,7 +71,7 @@ fun TodayStatus(
 
                 Icon(
                     imageVector = Icons.Default.Settings,
-                    contentDescription = "설정",
+                    contentDescription = stringResource(R.string.settings),
                     tint = Color.White,
                     modifier = Modifier
                         .size(24.dp)

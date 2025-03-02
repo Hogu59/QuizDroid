@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,7 +29,7 @@ import com.ottfstudio.quizdroid.ui.theme.CustomTypography
 
 @Composable
 fun QuestionCard(
-    quiz: Quiz?,
+    quiz: Quiz = Quiz.EMPTY,
     onChallenge: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -64,7 +65,7 @@ fun QuestionCard(
                         horizontalArrangement = Arrangement.Absolute.SpaceBetween,
                     ) {
                         Text(
-                            text = "코루틴 스코프와 컨텍스트",
+                            text = quiz.title,
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.Black,
@@ -78,7 +79,7 @@ fun QuestionCard(
                                 .padding(horizontal = 8.dp, vertical = 4.dp),
                         ) {
                             Text(
-                                text = "중급",
+                                text = quiz.level,
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = Color(0xFF6D5D00),
@@ -87,8 +88,10 @@ fun QuestionCard(
                     }
 
                     Text(
-                        text = "코루틴의 스코프와 컨텍스트의 차이점을 설명하고, 각자의 사용 사례를 제시하시오.",
+                        text = quiz.question,
                         fontSize = 14.sp,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
                         color = Color(0xFF6C757D),
                         modifier = Modifier.padding(top = 8.dp),
                     )
@@ -117,7 +120,7 @@ fun QuestionCard(
 @Composable
 private fun QuestionCardPreview() {
     QuestionCard(
-        quiz = null,
+        quiz = Quiz.EMPTY,
         onChallenge = { /* TODO: 문제 풀기 액션 */ },
     )
 }

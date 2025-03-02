@@ -24,6 +24,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ottfstudio.quizdroid.R
+import com.ottfstudio.quizdroid.ui.theme.Gray200
+import com.ottfstudio.quizdroid.ui.theme.Gray400
 
 @Composable
 fun StudyStatisticsCard(
@@ -57,10 +59,10 @@ fun StudyStatisticsCard(
                 StatisticsItem(title = stringResource(R.string.accuracy_rate), value = "85%", isPercentage = true)
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            // Spacer(modifier = Modifier.height(16.dp))
 
             // 막대 그래프
-            StudyBarChart(data = listOf(5, 2, 7, 4, 3))
+            // StudyBarChart(data = listOf(5, 2, 7, 4, 3))
         }
     }
 }
@@ -72,23 +74,31 @@ fun StatisticsItem(
     modifier: Modifier = Modifier,
     isPercentage: Boolean = false,
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
+    Box(
         modifier = modifier
-            .width(93.dp)
-            .height(52.dp),
+            .background(Gray200, shape = RoundedCornerShape(8.dp))
+            .width(100.dp)
+            .padding(vertical = 16.dp),
+        contentAlignment = Alignment.Center,
     ) {
-        Text(
-            text = value,
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-        )
-        Text(
-            text = title,
-            fontSize = 14.sp,
-            color = Color.Gray,
-        )
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = modifier
+                .width(93.dp)
+                .height(52.dp),
+        ) {
+            Text(
+                text = value,
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+            )
+            Text(
+                text = title,
+                fontSize = 14.sp,
+                color = Gray400,
+            )
+        }
     }
 }
 

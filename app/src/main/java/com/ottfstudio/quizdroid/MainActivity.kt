@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -40,13 +39,13 @@ class MainActivity : ComponentActivity() {
                                 viewModel = homeViewModel,
                                 quizViewModel = quizViewModel,
                                 onNavigateToQuiz = { navController.navigate(Route.Quiz) },
-                                onNavigateToSettings = { navController.navigate(Route.Settings) }
+                                onNavigateToSettings = { navController.navigate(Route.Settings) },
                             )
                         }
                         composable<Route.Quiz> {
                             QuizScreenRoot(
                                 viewModel = quizViewModel,
-                                onNavigateBack = { navController.navigateUp() }
+                                onNavigateBack = { navController.navigateUp() },
                             )
                         }
                         composable<Route.Settings> {

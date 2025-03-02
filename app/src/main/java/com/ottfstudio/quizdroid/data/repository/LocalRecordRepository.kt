@@ -26,7 +26,7 @@ class LocalRecordRepository
             )
         }
 
-    override suspend fun deleteQuizRecord(date: String) {
-        recordDataSource.deleteQuizRecord(date)
+        override suspend fun deleteQuizRecord(date: String) {
+            recordDataSource.deleteQuizRecord(date)
+        }
     }
-}

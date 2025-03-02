@@ -19,18 +19,23 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ottfstudio.quizdroid.presentation.home.components.QuestionCard
 import com.ottfstudio.quizdroid.presentation.home.components.StudyStatisticsCard
 import com.ottfstudio.quizdroid.presentation.home.components.TodayStatus
+import com.ottfstudio.quizdroid.presentation.quiz.QuizState
+import com.ottfstudio.quizdroid.presentation.quiz.QuizViewModel
 import com.ottfstudio.quizdroid.ui.theme.QuizDroidTheme
 
 @Composable
 fun HomeScreenRoot(
     viewModel: HomeViewModel,
+    quizViewModel: QuizViewModel,
     onNavigateToQuiz: () -> Unit,
     onNavigateToSettings: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val quizState by quizViewModel.state.collectAsStateWithLifecycle()
 
     HomeScreen(
         state = state,
+        quizState = quizState,
         onAction = { action ->
             when (action) {
                 is HomeAction.OnNavigateToQuiz -> onNavigateToQuiz()
@@ -45,6 +50,7 @@ fun HomeScreenRoot(
 @Composable
 fun HomeScreen(
     state: HomeState,
+    quizState: QuizState,
     onAction: (HomeAction) -> Unit,
 ) {
     Scaffold(
@@ -59,7 +65,8 @@ fun HomeScreen(
         ) {
             // 오늘의 학습 섹션
             TodayStatus(
-                date = state.today,
+                date = quizState.today,
+                isSolved = quizState.isSolved,
                 onNavigateToSettings = { onAction(HomeAction.OnNavigateToSettings) },
                 modifier = Modifier.shadow(
                     elevation = 8.dp,
@@ -69,7 +76,7 @@ fun HomeScreen(
             )
 
             QuestionCard(
-                quiz = state.quiz,
+                quiz = quizState.quiz,
                 onChallenge = { onAction(HomeAction.OnNavigateToQuiz) },
                 modifier = Modifier
                     .padding(16.dp)
@@ -99,7 +106,8 @@ fun HomeScreen(
 fun HomeScreenPreview() {
     QuizDroidTheme {
         HomeScreen(
-            state = HomeState(today = "2025년 3월 10일"),
+            quizState = QuizState(today = "2025년 3월 10일"),
+            state = HomeState(),
             onAction = {},
         )
     }

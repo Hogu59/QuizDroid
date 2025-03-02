@@ -36,7 +36,7 @@ fun AnswerSheet(
         Column(
             modifier = Modifier.padding(16.dp),
         ) {
-            AnswerResult(answer == selectedOption)
+            AnswerResult(answer - 1 == selectedOption)
 
             Spacer(modifier = Modifier.height(16.dp))
 

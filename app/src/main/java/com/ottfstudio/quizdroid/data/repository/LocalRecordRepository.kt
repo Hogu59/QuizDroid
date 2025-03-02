@@ -25,4 +25,8 @@ class LocalRecordRepository
                 record.toEntity(),
             )
         }
+
+    override suspend fun deleteQuizRecord(date: String) {
+        recordDataSource.deleteQuizRecord(date)
     }
+}

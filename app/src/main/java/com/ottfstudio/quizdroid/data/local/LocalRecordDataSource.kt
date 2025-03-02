@@ -20,4 +20,8 @@ class LocalRecordDataSource
         override suspend fun insertQuizRecord(quizRecord: QuizRecord) {
             recordDao.insertQuizRecord(quizRecord)
         }
+
+    override suspend fun deleteQuizRecord(date: String) {
+        recordDao.deleteQuizRecordByDate(date)
     }
+}

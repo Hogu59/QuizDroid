@@ -1,3 +1,4 @@
 /build
-/release.keystore
+/release_keystore.jks
+/keystore.b64
 /release

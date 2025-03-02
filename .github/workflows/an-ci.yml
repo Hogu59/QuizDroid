@@ -19,7 +19,6 @@ env:
   BASE_URL_DEV: ${{ secrets.BASE_URL_DEV }}
   BASE_URL_API: ${{ secrets.BASE_URL_API }}
   TABLE_NAME: ${{ secrets.TABLE_NAME }}
-  STORE_FILE: ${{ secrets.STORE_FILE }}
   STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
   KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
   KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
@@ -45,7 +44,6 @@ jobs:
           echo base_url_dev=\"$BASE_URL_DEV\" >> ./local.properties
           echo base_url_release=\"$BASE_URL_API\" >> ./local.properties
           echo table_name=\"$TABLE_NAME\" >> ./local.properties
-          echo store_file="$STORE_FILE" >> ./local.properties
           echo store_password="$STORE_PASSWORD" >> ./local.properties
           echo key_alias="$KEY_ALIAS" >> ./local.properties
           echo key_password="$KEY_PASSWORD" >> ./local.properties
@@ -86,13 +84,16 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Decode Keystore File
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > app/release_keystore.jks
+
       - name: Set up environment variable for BuildConfig
         run: |
           echo api_key=\"$API_KEY\" > ./local.properties
           echo base_url_dev=\"$BASE_URL_DEV\" >> ./local.properties
           echo base_url_release=\"$BASE_URL_API\" >> ./local.properties
           echo table_name=\"$TABLE_NAME\" >> ./local.properties
-          echo store_file="$STORE_FILE" >> ./local.properties
           echo store_password="$STORE_PASSWORD" >> ./local.properties
           echo key_alias="$KEY_ALIAS" >> ./local.properties
           echo key_password="$KEY_PASSWORD" >> ./local.properties

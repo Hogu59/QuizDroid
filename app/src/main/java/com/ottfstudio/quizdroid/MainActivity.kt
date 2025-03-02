@@ -23,10 +23,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
             QuizDroidTheme {
                 val navController = rememberNavController()
+                val quizViewModel = hiltViewModel<QuizViewModel>()
                 NavHost(
                     navController = navController,
                     startDestination = Route.QuizDroidGraph,
@@ -35,20 +35,18 @@ class MainActivity : ComponentActivity() {
                         startDestination = Route.Home,
                     ) {
                         composable<Route.Home> {
-                            val viewModel: HomeViewModel = hiltViewModel()
+                            val homeViewModel: HomeViewModel = hiltViewModel()
                             HomeScreenRoot(
-                                viewModel = viewModel,
+                                viewModel = homeViewModel,
+                                quizViewModel = quizViewModel,
                                 onNavigateToQuiz = { navController.navigate(Route.Quiz) },
-                                onNavigateToSettings = { navController.navigate(Route.Settings) },
+                                onNavigateToSettings = { navController.navigate(Route.Settings) }
                             )
                         }
                         composable<Route.Quiz> {
-                            val viewModel: QuizViewModel = hiltViewModel()
                             QuizScreenRoot(
-                                viewModel = viewModel,
-                                onNavigateBack = {
-                                    navController.navigateUp()
-                                },
+                                viewModel = quizViewModel,
+                                onNavigateBack = { navController.navigateUp() }
                             )
                         }
                         composable<Route.Settings> {

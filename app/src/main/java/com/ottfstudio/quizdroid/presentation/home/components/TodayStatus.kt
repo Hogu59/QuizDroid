@@ -6,15 +6,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -33,12 +30,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ottfstudio.quizdroid.R
 import com.ottfstudio.quizdroid.ui.theme.Gray400
-import com.ottfstudio.quizdroid.ui.theme.Green100
 import com.ottfstudio.quizdroid.ui.theme.RobotoFontFamily
 
 @Composable
 fun TodayStatus(
     date: String,
+    isSolved: Boolean,
 //    progress: Float,
 //    totalQuestions: Int,
 //    completedQuestions: Int,
@@ -99,20 +96,7 @@ fun TodayStatus(
                             style = MaterialTheme.typography.bodyMedium,
                             textAlign = TextAlign.Start,
                         )
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(
-                                imageVector = Icons.Default.CheckCircle,
-                                contentDescription = stringResource(R.string.completed),
-                                tint = Green100,
-                                modifier = Modifier.size(14.dp),
-                            )
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text(
-                                text = stringResource(R.string.completed),
-                                fontSize = 14.sp,
-                                color = Green100,
-                            )
-                        }
+                        SolvedMark(isSolved = isSolved)
                     }
                     Box(
                         contentAlignment = Alignment.Center,
@@ -141,6 +125,7 @@ fun TodayStatus(
 private fun TodayStatusPreview() {
     TodayStatus(
         date = "2025년 3월 10일",
+        isSolved = false,
         onNavigateToSettings = {},
     )
 }

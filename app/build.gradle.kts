@@ -26,8 +26,8 @@ android {
         applicationId = "com.ottfstudio.quizdroid"
         minSdk = 28
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "0.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -47,9 +47,20 @@ android {
         unitTests.isReturnDefaultValues = true
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file(properties.getProperty("store_file"))
+            storePassword = properties.getProperty("store_password")
+            keyAlias = properties.getProperty("key_alias")
+            keyPassword = properties.getProperty("key_password")
+        }
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isDebuggable = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
@@ -59,8 +70,8 @@ android {
                 "BASE_URL",
                 properties.getProperty("base_url_release"),
             )
-            signingConfig = signingConfigs.getByName("debug")
-//            signingConfig = signingConfigs.getByName("release")
+//            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("release")
         }
 
         debug {

@@ -48,6 +48,7 @@ jobs:
           echo base_url_dev=\"$BASE_URL_DEV\" >> ./local.properties
           echo base_url_release=\"$BASE_URL_API\" >> ./local.properties
           echo table_name=\"$TABLE_NAME\" >> ./local.properties
+          echo store_file="app/release_keystore.jks" >> ./local.properties
           echo store_password="$STORE_PASSWORD" >> ./local.properties
           echo key_alias="$KEY_ALIAS" >> ./local.properties
           echo key_password="$KEY_PASSWORD" >> ./local.properties
@@ -98,6 +99,7 @@ jobs:
           echo base_url_dev=\"$BASE_URL_DEV\" >> ./local.properties
           echo base_url_release=\"$BASE_URL_API\" >> ./local.properties
           echo table_name=\"$TABLE_NAME\" >> ./local.properties
+          echo store_file="app/release_keystore.jks" >> ./local.properties
           echo store_password="$STORE_PASSWORD" >> ./local.properties
           echo key_alias="$KEY_ALIAS" >> ./local.properties
           echo key_password="$KEY_PASSWORD" >> ./local.properties

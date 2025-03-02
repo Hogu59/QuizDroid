@@ -8,4 +8,6 @@ interface RecordDataSource {
     suspend fun insertQuizRecord(
         quizRecord: QuizRecord,
     )
+
+    suspend fun deleteQuizRecord(date: String)
 }

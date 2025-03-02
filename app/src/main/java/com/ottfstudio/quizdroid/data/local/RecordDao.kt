@@ -16,4 +16,7 @@ interface RecordDao {
 
     @Query("SELECT * FROM quiz_record WHERE date = :date")
     suspend fun fetchQuizRecordByDate(date: String): QuizRecord?
+
+    @Query("DELETE FROM quiz_record WHERE date = :date")
+    suspend fun deleteQuizRecordByDate(date: String)
 }

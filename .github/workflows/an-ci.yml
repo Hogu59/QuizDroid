@@ -49,7 +49,7 @@ jobs:
           echo store_password="$STORE_PASSWORD" >> ./local.properties
           echo key_alias="$KEY_ALIAS" >> ./local.properties
           echo key_password="$KEY_PASSWORD" >> ./local.properties
-          echo "$STORE_FILE_BASE64" | base64 -d > ./app/keystore.jks 
+          echo "$STORE_FILE_BASE64" | base64 -d > ./app/release_keystore.jks 
 
       - name: Cache Gradle Home
         uses: actions/cache@v3
@@ -96,7 +96,7 @@ jobs:
           echo store_password="$STORE_PASSWORD" >> ./local.properties
           echo key_alias="$KEY_ALIAS" >> ./local.properties
           echo key_password="$KEY_PASSWORD" >> ./local.properties
-          echo "$STORE_FILE_BASE64" | base64 -d > ./app/keystore.jks 
+          echo "$STORE_FILE_BASE64" | base64 -d > ./app/release_keystore.jks 
 
       - name: Cache Gradle Home
         uses: actions/cache@v3

@@ -92,7 +92,10 @@ fun StatisticsItem(
                 .height(52.dp),
         ) {
             Text(
-                text = value + if (isPercentage) "%" else "",
+                text = buildString {
+                    append(value)
+                    if (isPercentage) append("%")
+                },
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
             )

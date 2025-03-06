@@ -23,8 +23,9 @@ class LocalRecordRepository
         override suspend fun insertQuizRecord(
             record: Record,
         ) {
+            val consecutiveCount = fetchLatestConsecutiveSolvedCount(record.date) + 1
             recordDataSource.insertQuizRecord(
-                record.toEntity(consecutiveCount = fetchLatestConsecutiveSolvedCount(record.date) + 1),
+                record.toEntity(consecutiveCount = consecutiveCount),
             )
         }
 
@@ -39,7 +40,7 @@ class LocalRecordRepository
                 latestRecord.date == today -> latestRecord.consecutiveCount
                 else -> {
                     when {
-                        isYesterday(today, latestRecord.date) -> latestRecord.consecutiveCount
+                        isConsecutiveDate(today, latestRecord.date) -> latestRecord.consecutiveCount
                         else -> 0
                     }
                 }
@@ -54,11 +55,11 @@ class LocalRecordRepository
             return recordDataSource.fetchTotalCorrectCount()
         }
 
-        private fun isYesterday(today: String, yesterday: String): Boolean {
+        private fun isConsecutiveDate(current: String, previous: String): Boolean {
             val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
 
-            val todayDate = LocalDate.parse(today, formatter)
-            val yesterdayDate = LocalDate.parse(yesterday, formatter)
+            val todayDate = LocalDate.parse(current, formatter)
+            val yesterdayDate = LocalDate.parse(previous, formatter)
 
             return todayDate.minusDays(1) == yesterdayDate
         }

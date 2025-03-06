@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.ottfstudio.quizdroid.domain.model.Record
 import com.ottfstudio.quizdroid.domain.repository.QuizRepository
 import com.ottfstudio.quizdroid.domain.repository.RecordRepository
+import com.ottfstudio.quizdroid.presentation.event.QuizEvent
+import com.ottfstudio.quizdroid.presentation.event.QuizEventBus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -99,20 +101,23 @@ class QuizViewModel
         }
 
         private fun solveQuiz() {
+            val selectedOption = state.value.selectedOption ?: return
             viewModelScope.launch {
                 try {
                     recordRepository.insertQuizRecord(
                         Record(
                             date = state.value.today,
                             quiz = state.value.quiz,
-                            selectedOption = state.value.selectedOption ?: -1,
-                            isCorrect = state.value.quiz.answer == state.value.selectedOption,
+                            selectedOption = selectedOption,
+                            isCorrect = state.value.quiz.answer == selectedOption + 1,
                             isSolved = state.value.isSolved,
                         ),
                     )
                 } catch (e: Exception) {
                     println("Failed to solve quiz: $e")
                 }
+
+                QuizEventBus.emitEvent(QuizEvent.QuizSolved)
             }
         }
     }

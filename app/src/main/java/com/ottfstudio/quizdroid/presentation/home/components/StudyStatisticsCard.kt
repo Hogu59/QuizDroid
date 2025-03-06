@@ -29,6 +29,9 @@ import com.ottfstudio.quizdroid.ui.theme.Gray400
 
 @Composable
 fun StudyStatisticsCard(
+    totalCount: Int,
+    consecutiveCount: Int,
+    correctRate: Int,
     modifier: Modifier = Modifier,
 ) {
     Card(
@@ -54,9 +57,9 @@ fun StudyStatisticsCard(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
-                StatisticsItem(title = stringResource(R.string.total_problems), value = "42")
-                StatisticsItem(title = stringResource(R.string.consecutive_days), value = "7")
-                StatisticsItem(title = stringResource(R.string.accuracy_rate), value = "85%", isPercentage = true)
+                StatisticsItem(title = stringResource(R.string.total_problems), value = totalCount.toString())
+                StatisticsItem(title = stringResource(R.string.consecutive_days), value = consecutiveCount.toString())
+                StatisticsItem(title = stringResource(R.string.accuracy_rate), value = correctRate.toString(), isPercentage = true)
             }
 
             // Spacer(modifier = Modifier.height(16.dp))
@@ -89,7 +92,7 @@ fun StatisticsItem(
                 .height(52.dp),
         ) {
             Text(
-                text = value,
+                text = value + if (isPercentage) "%" else "",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
             )
@@ -138,5 +141,9 @@ fun StudyBarChart(data: List<Int>, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewStudyStatisticsCard() {
-    StudyStatisticsCard()
+    StudyStatisticsCard(
+        totalCount = 42,
+        consecutiveCount = 7,
+        correctRate = 85,
+    )
 }

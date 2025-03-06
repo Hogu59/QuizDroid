@@ -14,6 +14,15 @@ interface RecordDao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insertQuizRecord(quizRecord: QuizRecord)
 
+    @Query("SELECT * FROM quiz_record ORDER BY id DESC LIMIT 1")
+    suspend fun fetchLatestRecord(): QuizRecord?
+
+    @Query("SELECT COUNT(*) FROM quiz_record")
+    suspend fun fetchTotalRecordCount(): Int
+
+    @Query("SELECT COUNT(*) FROM quiz_record WHERE isCorrect = 1")
+    suspend fun fetchTotalCorrectCount(): Int
+
     @Query("SELECT * FROM quiz_record WHERE date = :date")
     suspend fun fetchQuizRecordByDate(date: String): QuizRecord?
 

@@ -17,6 +17,18 @@ class LocalRecordDataSource
             return recordDao.fetchQuizRecordByDate(date)
         }
 
+        override suspend fun fetchLatestRecord(): QuizRecord? {
+            return recordDao.fetchLatestRecord()
+        }
+
+        override suspend fun fetchTotalRecordCount(): Int {
+            return recordDao.fetchTotalRecordCount()
+        }
+
+        override suspend fun fetchTotalCorrectCount(): Int {
+            return recordDao.fetchTotalCorrectCount()
+        }
+
         override suspend fun insertQuizRecord(quizRecord: QuizRecord) {
             recordDao.insertQuizRecord(quizRecord)
         }

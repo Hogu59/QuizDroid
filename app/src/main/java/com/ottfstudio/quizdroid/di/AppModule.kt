@@ -2,6 +2,8 @@ package com.ottfstudio.quizdroid.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.google.gson.Gson
 import com.ottfstudio.quizdroid.data.local.RecordDao
 import com.ottfstudio.quizdroid.data.local.RecordDatabase
@@ -34,7 +36,7 @@ object AppModule {
             "quiz_database",
         )
             .addTypeConverter(quizConverter)
-            .addMigrations()
+            .addMigrations(DatabaseMigrations.MIGRATION_1_2)
             .build()
     }
 
@@ -48,5 +50,13 @@ object AppModule {
     @Singleton
     fun provideQuizConverter(gson: Gson): QuizConverter {
         return QuizConverter(gson)
+    }
+}
+
+object DatabaseMigrations {
+    val MIGRATION_1_2 = object : Migration(1, 2) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("ALTER TABLE quiz_record ADD COLUMN consecutiveCount INTEGER NOT NULL DEFAULT 1")
+        }
     }
 }

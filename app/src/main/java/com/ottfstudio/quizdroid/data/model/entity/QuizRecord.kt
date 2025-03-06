@@ -17,4 +17,5 @@ data class QuizRecord(
     val solvedResult: Int,
     val isCorrect: Boolean,
     val isSolved: Boolean,
+    val consecutiveCount: Int,
 )

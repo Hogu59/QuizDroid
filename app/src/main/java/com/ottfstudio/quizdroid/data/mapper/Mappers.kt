@@ -13,7 +13,7 @@ fun QuizRecord.toDomain(): Record =
         isSolved = isSolved,
     )
 
-fun Record.toEntity(): QuizRecord =
+fun Record.toEntity(consecutiveCount: Int): QuizRecord =
     QuizRecord(
         date = date,
         quiz = quiz,
@@ -21,4 +21,5 @@ fun Record.toEntity(): QuizRecord =
         solvedResult = solvedResult,
         isCorrect = isCorrect,
         isSolved = isSolved,
+        consecutiveCount = consecutiveCount,
     )

@@ -1,5 +1,6 @@
 package com.ottfstudio.quizdroid.data.repository
 
+import androidx.room.Transaction
 import com.ottfstudio.quizdroid.data.datasource.RecordDataSource
 import com.ottfstudio.quizdroid.data.mapper.toDomain
 import com.ottfstudio.quizdroid.data.mapper.toEntity
@@ -20,6 +21,7 @@ class LocalRecordRepository
             return recordDataSource.fetchQuizRecord(date)?.toDomain()
         }
 
+        @Transaction
         override suspend fun insertQuizRecord(
             record: Record,
         ) {

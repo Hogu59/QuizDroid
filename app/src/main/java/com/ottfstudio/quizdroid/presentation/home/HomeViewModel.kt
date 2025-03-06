@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeParseException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,7 +29,6 @@ class HomeViewModel
         private val _state = MutableStateFlow(HomeState())
         val state = _state
             .onStart {
-                updateTodayState()
                 fetchTotalSolvedCount()
                 fetchConsecutiveCount()
             }.onEach {
@@ -66,7 +64,8 @@ class HomeViewModel
         }
 
         private suspend fun fetchConsecutiveCount() {
-            val today = getFormattedToday()
+            val today = currentFormattedDate()
+            updateTodayInState(today)
             val consecutiveCount = recordRepository.fetchLatestConsecutiveSolvedCount(today)
 
             _state.update {
@@ -82,25 +81,21 @@ class HomeViewModel
             fetchCorrectRate(count)
         }
 
-        private fun getFormattedToday(): String {
-            val currentDate = LocalDate.now()
-            val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
-
+        private fun currentFormattedDate(): String {
             return try {
-                currentDate.format(formatter)
-            } catch (e: DateTimeParseException) {
-                Log.e(TAG, "Error formatting date", e)
-                "Error: Could not fetch date"
+                val currentDate = LocalDate.now()
+                val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
+                val formattedDate = currentDate.format(formatter)
+                require(formattedDate.isNotBlank()) { "Formatted date is blank" }
+                formattedDate
             } catch (e: Exception) {
-                Log.e(TAG, "Unexpected error fetching today", e)
-                "Error: Unexpected error"
-                // TODO 예외 처리 제외 및 스낵바 노출로 변경
+                Log.e("HomeViewModel", "Error getting formatted date", e)
+                throw IllegalStateException("Error getting formatted date", e)
             }
         }
 
-        private fun updateTodayState() {
-            val formattedDate = getFormattedToday()
-            _state.value = _state.value.copy(today = formattedDate)
+        private fun updateTodayInState(dateString: String) {
+            _state.update { it.copy(today = dateString) }
         }
 
         private suspend fun fetchCorrectRate(totalSolvedCount: Int) {

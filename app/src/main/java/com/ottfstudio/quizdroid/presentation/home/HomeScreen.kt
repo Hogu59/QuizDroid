@@ -90,7 +90,7 @@ fun HomeScreen(
             StudyStatisticsCard(
                 totalCount = state.totalSolvedCount,
                 consecutiveCount = state.consecutiveSolvedCount,
-                correctRate = state.correctRate,
+                correctRate = state.correctRatePercent,
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .padding(bottom = 16.dp)

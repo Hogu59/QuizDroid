@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">QuizDroid</string>
+    <string name="date_format">yyyy년 MM월 dd일</string>
+    <string name="question_label">문제</string>
+    <string name="study_statistics">학습 통계</string>
+    <string name="total_problems">총 문제</string>
+    <string name="consecutive_days">연속 학습</string>
+    <string name="accuracy_rate">정답률</string>
+    <string name="todays_learning">오늘의 학습</string>
+    <string name="completed">완료</string>
+    <string name="daily_question">오늘의 문제</string>
+    <string name="monday">월</string>
+    <string name="tuesday">화</string>
+    <string name="wednesday">수</string>
+    <string name="thursday">목</string>
+    <string name="friday">금</string>
+    <string name="result_correct">정답입니다</string>
+    <string name="result_wrong">오답입니다</string>
+    <string name="loading_quiz">문제를 불러오는 중입니다.</string>
+    <string name="title_activity_oss_license">OssLicenseActivity</string>
+    <string name="settings">설정</string>
+    <string name="uncompleted">미완료</string>
 </resources>

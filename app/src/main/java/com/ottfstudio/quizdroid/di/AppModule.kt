@@ -1,6 +1,7 @@
 package com.ottfstudio.quizdroid.di
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
@@ -37,6 +38,7 @@ object AppModule {
         )
             .addTypeConverter(quizConverter)
             .addMigrations(DatabaseMigrations.MIGRATION_1_2)
+            .fallbackToDestructiveMigration()
             .build()
     }
 
@@ -56,7 +58,11 @@ object AppModule {
 object DatabaseMigrations {
     val MIGRATION_1_2 = object : Migration(1, 2) {
         override fun migrate(db: SupportSQLiteDatabase) {
-            db.execSQL("ALTER TABLE quiz_record ADD COLUMN consecutiveCount INTEGER NOT NULL DEFAULT 1")
+            try {
+                db.execSQL("ALTER TABLE quiz_record ADD COLUMN consecutiveCount INTEGER NOT NULL DEFAULT 1")
+            } catch (e: Exception) {
+                Log.e("Database Migrations", "Migration 1 - 2 failed: ${e.message}")
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.ottfstudio.quizdroid.data.local.converter
 
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.ottfstudio.quizdroid.domain.model.Quiz
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -32,11 +33,16 @@ class QuizConverterTest {
         val jsonString = quizConverter.fromQuiz(sampleQuiz)
 
         // JSON에 모든 필드가 포함되었는지 확인
+        val jsonObject = Gson().fromJson(jsonString, JsonObject::class.java)
+        assertEquals(1L, jsonObject.get("id").asLong)
         assert(jsonString.contains("\"id\":1"))
-        assert(jsonString.contains("\"category\":\"테스트 카테고리\""))
-        assert(jsonString.contains("\"question\":\"테스트 질문입니다\""))
-        assert(jsonString.contains("\"options\":[\"옵션1\",\"옵션2\",\"옵션3\"]"))
-        assert(jsonString.contains("\"answer\":2"))
+        assertEquals("테스트 카테고리", jsonObject.get("category").asString)
+        assertEquals("테스트 질문입니다", jsonObject.get("question").asString)
+        val options = jsonObject.getAsJsonArray("options")
+        assertEquals("옵션1", options[0].asString)
+        assertEquals("옵션2", options[1].asString)
+        assertEquals("옵션3", options[2].asString)
+        assertEquals(2, jsonObject.get("answer").asInt)
     }
 
     @Test

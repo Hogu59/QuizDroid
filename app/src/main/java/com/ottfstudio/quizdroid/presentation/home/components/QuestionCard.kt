@@ -105,7 +105,7 @@ fun QuestionCard(
                         shape = RoundedCornerShape(8.dp),
                     ) {
                         Text(
-                            text = "문제 풀기",
+                            text = stringResource(R.string.solve_problems),
                             color = Color.White,
                             fontSize = 14.sp,
                         )

@@ -30,9 +30,21 @@ fun AnswerResult(
     modifier: Modifier = Modifier,
 ) {
     val resultData = if (isCorrect) {
-        ResultData(stringResource(R.string.result_correct), Green100, R.drawable.ic_check, 13.0, Green40)
+        ResultData(
+            text = stringResource(R.string.result_correct),
+            textColor = Green100,
+            icon = R.drawable.ic_check,
+            iconSize = 13.0.dp,
+            boxColor = Green40,
+        )
     } else {
-        ResultData(stringResource(R.string.result_wrong), Red500, R.drawable.ic_x, 10.0, Red100)
+        ResultData(
+            text = stringResource(R.string.result_wrong),
+            textColor = Red500,
+            icon = R.drawable.ic_x,
+            iconSize = 10.0.dp,
+            boxColor = Red100,
+        )
     }
 
     Row(
@@ -51,7 +63,7 @@ fun AnswerResult(
             Image(
                 painter = painterResource(id = resultData.icon),
                 contentDescription = resultData.text,
-                modifier = Modifier.size(resultData.iconSize.dp),
+                modifier = Modifier.size(resultData.iconSize),
             )
         }
         Spacer(modifier = Modifier.width(12.dp))

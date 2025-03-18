@@ -1,7 +1,6 @@
 package com.ottfstudio.quizdroid.presentation.home
 
 import android.util.Log
-import androidx.activity.result.launch
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ottfstudio.quizdroid.domain.repository.RecordRepository
@@ -102,7 +101,7 @@ class HomeViewModel
             if (totalSolvedCount == 0) return
             val correctCount = recordRepository.fetchTotalCorrectCount()
 
-            _state.update { it.copy(correctRate = (correctCount.toFloat() / totalSolvedCount.toFloat() * 100).toInt()) }
+            _state.update { it.copy(correctRatePercent = (correctCount.toFloat() / totalSolvedCount.toFloat() * 100).toInt()) }
         }
 
         companion object {

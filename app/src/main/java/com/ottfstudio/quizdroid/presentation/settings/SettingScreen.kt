@@ -29,6 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ottfstudio.quizdroid.BuildConfig
 import com.ottfstudio.quizdroid.presentation.settings.components.SettingCard
 import com.ottfstudio.quizdroid.presentation.settings.components.SettingInfoItem
 import com.ottfstudio.quizdroid.presentation.settings.components.SettingListItem
@@ -114,7 +115,7 @@ fun SettingsScreen(
                 title = "앱 정보",
                 content = {
                     Column {
-                        SettingInfoItem(title = "현재 버전", value = "1.0.0")
+                        SettingInfoItem(title = "현재 버전", value = BuildConfig.VERSION_NAME)
                         HorizontalDivider(thickness = 0.5.dp)
                         SettingInfoItem(title = "최신 업데이트", value = "2025.02.27")
                     }

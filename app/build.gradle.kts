@@ -114,11 +114,11 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.junit.ktx)
     testImplementation(libs.junit)
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2") // JUnit 5 API
-    testImplementation("androidx.test:core:1.6.1")
-    testImplementation("androidx.test.ext:junit:1.1.5")
-    testImplementation("org.assertj:assertj-core:3.24.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2") // JUnit 5 Engine
+    testImplementation(libs.junit.jupiter.api)
+    testImplementation(libs.androidx.core)
+    testImplementation(libs.androidx.junit)
+    testImplementation(libs.assertj.core)
+    testRuntimeOnly(libs.junit.jupiter.engine)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

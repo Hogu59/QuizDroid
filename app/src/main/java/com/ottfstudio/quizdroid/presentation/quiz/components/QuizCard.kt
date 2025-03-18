@@ -66,16 +66,14 @@ fun QuizCard(
             Spacer(modifier = Modifier.height(8.dp))
 
             if (!isLoading) {
-                quiz.let {
-                    it.options.forEachIndexed { index, option ->
-                        AnswerOption(
-                            index = index,
-                            text = option,
-                            isSelected = selectedOption == index,
-                            onClick = { onOptionSelect(index) },
-                            modifier = Modifier.padding(top = 16.dp),
-                        )
-                    }
+                quiz.options.forEachIndexed { index, option ->
+                    AnswerOption(
+                        index = index,
+                        text = option,
+                        isSelected = selectedOption == index,
+                        onClick = { onOptionSelect(index) },
+                        modifier = Modifier.padding(top = 16.dp),
+                    )
                 }
             }
 

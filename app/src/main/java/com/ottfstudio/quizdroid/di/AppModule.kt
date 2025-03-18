@@ -61,7 +61,7 @@ object DatabaseMigrations {
             try {
                 db.execSQL("ALTER TABLE quiz_record ADD COLUMN consecutiveCount INTEGER NOT NULL DEFAULT 1")
             } catch (e: Exception) {
-                Log.e("DatabaseMigrations", "Migration 1-2 failed: ${e.message}")
+                Log.e("Database Migrations", "Migration 1 - 2 failed: ${e.message}")
             }
         }
     }

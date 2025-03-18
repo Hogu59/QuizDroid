@@ -64,10 +64,10 @@ private fun QuizScreen(
                 .padding(16.dp)
                 .verticalScroll(rememberScrollState()),
         ) {
-            // 문제 카드
             QuizCard(
                 quiz = quiz,
                 isLoading = state.isLoading,
+                isSolved = state.isSolved,
                 selectedOption = state.selectedOption,
                 onOptionSelect = { onAction(QuizAction.OnSelectOption(it)) },
             )
@@ -75,7 +75,6 @@ private fun QuizScreen(
             if (!state.isShowAnswer) {
                 Spacer(modifier = Modifier.weight(1f))
 
-                // 답안 제출 버튼
                 SubmitButton(
                     enabled = state.selectedOption != null && !state.isLoading,
                     onClick = { onAction(QuizAction.OnSubmitAnswer) },

@@ -25,6 +25,7 @@ import com.ottfstudio.quizdroid.domain.model.Quiz
 fun QuizCard(
     quiz: Quiz,
     isLoading: Boolean,
+    isSolved: Boolean,
     onOptionSelect: (Int) -> Unit,
     modifier: Modifier = Modifier,
     selectedOption: Int? = null,
@@ -36,7 +37,6 @@ fun QuizCard(
             .border(1.dp, Color(0xFFE0E0E0), RoundedCornerShape(12.dp)),
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            // 난이도 표시
             Box(
                 modifier = Modifier
                     .background(Color(0xFFFFEB3B), shape = RoundedCornerShape(4.dp))
@@ -71,7 +71,11 @@ fun QuizCard(
                         index = index,
                         text = option,
                         isSelected = selectedOption == index,
-                        onClick = { onOptionSelect(index) },
+                        onClick = {
+                            if(!isSolved) {
+                                onOptionSelect(index)
+                            }
+                        },
                         modifier = Modifier.padding(top = 16.dp),
                     )
                 }
@@ -89,6 +93,7 @@ private fun QuizCardPreviewLoading() {
         quiz = Quiz.SAMPLE_QUIZ,
         isLoading = true,
         onOptionSelect = {},
+        isSolved = false,
     )
 }
 
@@ -99,5 +104,6 @@ private fun QuizCardPreviewLoaded() {
         quiz = Quiz.SAMPLE_QUIZ,
         isLoading = false,
         onOptionSelect = {},
+        isSolved = false,
     )
 }

@@ -72,7 +72,7 @@ fun QuizCard(
                         text = option,
                         isSelected = selectedOption == index,
                         onClick = {
-                            if(!isSolved) {
+                            if (!isSolved) {
                                 onOptionSelect(index)
                             }
                         },

@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -87,7 +88,7 @@ class HomeViewModel
                 val formattedDate = currentDate.format(formatter)
                 require(formattedDate.isNotBlank()) { "Formatted date is blank" }
                 formattedDate
-            } catch (e: Exception) {
+            } catch (e: DateTimeParseException) {
                 Log.e("HomeViewModel", "Error getting formatted date", e)
                 throw IllegalStateException("Error getting formatted date", e)
             }

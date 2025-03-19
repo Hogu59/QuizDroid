@@ -35,6 +35,11 @@ class LocalRecordRepository
             recordDataSource.deleteQuizRecord(date)
         }
 
+        /***
+         * 오늘 일자를 기준으로 연속풀이를 진행한 날짜를 계산하는 함수
+         *  @param today 오늘 날짜 (yyyy.MM.dd)
+         *  @return 연속풀이를 진행한 날짜의 개수
+         */
         override suspend fun fetchLatestConsecutiveSolvedCount(today: String): Int {
             val latestRecord = recordDataSource.fetchLatestRecord()
             return when {
@@ -61,8 +66,8 @@ class LocalRecordRepository
             val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
 
             val todayDate = LocalDate.parse(current, formatter)
-            val yesterdayDate = LocalDate.parse(previous, formatter)
+            val previousDate = LocalDate.parse(previous, formatter)
 
-            return todayDate.minusDays(1) == yesterdayDate
+            return todayDate.minusDays(1) == previousDate
         }
     }

@@ -37,10 +37,10 @@ fun TodayStatus(
     date: String,
     isSolved: Boolean,
 //    progress: Float,
-//    totalQuestions: Int,
     solvedQuestions: Int,
     onNavigateToSettings: () -> Unit,
     modifier: Modifier = Modifier,
+    daysOfWeek: Int = 7,
 ) {
     Box(
         modifier = modifier
@@ -106,11 +106,8 @@ fun TodayStatus(
                             .padding(top = 16.dp),
                     ) {
                         CircularProgressWithText(
-                            // progress = progress,
-                            // total = totalQuestions,
-                            // current = completedQuestions,
-                            progress = solvedQuestions / 7f,
-                            total = 7,
+                            progress = solvedQuestions / daysOfWeek.toFloat(),
+                            total = daysOfWeek,
                             current = solvedQuestions,
                         )
                     }

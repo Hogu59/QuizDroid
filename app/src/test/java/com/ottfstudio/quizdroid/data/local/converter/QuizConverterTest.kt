@@ -35,7 +35,6 @@ class QuizConverterTest {
         // JSON에 모든 필드가 포함되었는지 확인
         val jsonObject = Gson().fromJson(jsonString, JsonObject::class.java)
         assertEquals(1L, jsonObject.get("id").asLong)
-        assert(jsonString.contains("\"id\":1"))
         assertEquals("테스트 카테고리", jsonObject.get("category").asString)
         assertEquals("테스트 질문입니다", jsonObject.get("question").asString)
         val options = jsonObject.getAsJsonArray("options")

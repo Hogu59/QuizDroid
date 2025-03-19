@@ -26,7 +26,8 @@ interface RecordDao {
     @Query("SELECT * FROM quiz_record WHERE date = :date")
     suspend fun fetchQuizRecordByDate(date: String): QuizRecord?
 
-    /*** 지정된 날짜 범위 내에 해결된 퀴즈의 수를 조회합니다.
+    /**
+     *  지정된 날짜 범위 내에 해결된 퀴즈의 수를 조회합니다.
      *
      * @param startDate 조회 시작 날짜 (형식: "yyyy.MM.dd")
      * @param endDate 조회 종료 날짜 (형식: "yyyy.MM.dd")

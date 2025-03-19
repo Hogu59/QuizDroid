@@ -107,7 +107,9 @@ class HomeViewModel
             _state.update { it.copy(correctRatePercent = (correctCount.toFloat() / totalSolvedCount.toFloat() * 100).toInt()) }
         }
 
-        /*** 오늘 날짜를 기준으로 월요일과 일요일의 날짜를 구한 후 해당 날짜 사이의 퀴즈 푼 횟수를 조회합니다. */
+        /**
+         * 오늘 날짜를 기준으로 월요일과 일요일의 날짜를 구한 후 해당 날짜 사이의 퀴즈 푼 횟수를 조회합니다.
+         */
         private fun fetchWeeklySolvedCount() {
             val (startOfWeek, endOfWeek) = calculateStartAndEndDateOfWeek()
 

@@ -109,6 +109,14 @@ class HomeViewModel
 
         /*** 오늘 날짜를 기준으로 월요일과 일요일의 날짜를 구한 후 해당 날짜 사이의 퀴즈 푼 횟수를 조회합니다. */
         private fun fetchWeeklySolvedCount() {
+            val (startOfWeek, endOfWeek) = calculateStartAndEndDateOfWeek()
+
+            viewModelScope.launch {
+                fetchSolvedCountByDateRange(startOfWeek, endOfWeek)
+            }
+        }
+
+        private fun calculateStartAndEndDateOfWeek(): Pair<String, String> {
             val today = LocalDate.now()
             val dayOfWeek = today.dayOfWeek.value
 
@@ -116,10 +124,7 @@ class HomeViewModel
                 today.minusDays((dayOfWeek - DayOfWeek.MONDAY.value).toLong()).format(formatter)
             val endOfWeek =
                 today.plusDays((DayOfWeek.SUNDAY.value - dayOfWeek).toLong()).format(formatter)
-
-            viewModelScope.launch {
-                fetchSolvedCountByDateRange(startOfWeek, endOfWeek)
-            }
+            return Pair(startOfWeek, endOfWeek)
         }
 
         private suspend fun fetchSolvedCountByDateRange(startDate: String, endDate: String) {

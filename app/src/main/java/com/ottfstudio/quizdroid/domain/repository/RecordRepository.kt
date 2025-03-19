@@ -7,7 +7,7 @@ interface RecordRepository {
 
     /***오늘 날짜를 기준으로 최근 연속 정답 횟수를 조회합니다.
      *
-     * @param today 오늘 날짜 (형식: "yyyy-MM-dd")
+     * @param today 오늘 날짜 (형식: "yyyy.MM.dd")
      * @return 연속 정답 횟수
      */
     suspend fun fetchLatestConsecutiveSolvedCount(today: String): Int

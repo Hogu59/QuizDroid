@@ -35,8 +35,7 @@ class LocalRecordRepository
             recordDataSource.deleteQuizRecord(date)
         }
 
-        /***
-         * 오늘 일자를 기준으로 연속풀이를 진행한 날짜를 계산하는 함수
+        /*** 오늘 일자를 기준으로 연속풀이를 진행한 날짜를 계산하는 함수
          *  @param today 오늘 날짜 (yyyy.MM.dd)
          *  @return 연속풀이를 진행한 날짜의 개수
          */

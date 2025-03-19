@@ -53,9 +53,7 @@ fun HomeScreen(
     quizState: QuizState,
     onAction: (HomeAction) -> Unit,
 ) {
-    Scaffold(
-        // bottomBar = { BottomNavigationBar() },
-    ) { paddingValues ->
+    Scaffold { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -63,7 +61,6 @@ fun HomeScreen(
                 .padding(paddingValues)
                 .verticalScroll(rememberScrollState()),
         ) {
-            // 오늘의 학습 섹션
             TodayStatus(
                 date = quizState.today,
                 isSolved = quizState.isSolved,

@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
@@ -30,6 +31,7 @@ class HomeViewModel
         val state = _state
             .onStart {
                 fetchTotalSolvedCount()
+                fetchWeeklySolvedCount()
                 fetchConsecutiveCount()
             }.onEach {
                 QuizEventBus.events
@@ -39,6 +41,7 @@ class HomeViewModel
                                 viewModelScope.launch {
                                     fetchTotalSolvedCount()
                                     fetchConsecutiveCount()
+                                    fetchWeeklySolvedCount()
                                 }
                             }
                         }
@@ -84,12 +87,11 @@ class HomeViewModel
         private fun currentFormattedDate(): String {
             return try {
                 val currentDate = LocalDate.now()
-                val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
                 val formattedDate = currentDate.format(formatter)
                 require(formattedDate.isNotBlank()) { "Formatted date is blank" }
                 formattedDate
             } catch (e: DateTimeParseException) {
-                Log.e("HomeViewModel", "Error getting formatted date", e)
+                Log.e(TAG, "Error getting formatted date", e)
                 throw IllegalStateException("Error getting formatted date", e)
             }
         }
@@ -105,7 +107,30 @@ class HomeViewModel
             _state.update { it.copy(correctRatePercent = (correctCount.toFloat() / totalSolvedCount.toFloat() * 100).toInt()) }
         }
 
+        /*** 오늘 날짜를 기준으로 월요일과 일요일의 날짜를 구한 후 해당 날짜 사이의 퀴즈 푼 횟수를 조회합니다. */
+        private fun fetchWeeklySolvedCount() {
+            val today = LocalDate.now()
+            val dayOfWeek = today.dayOfWeek.value
+
+            val startOfWeek =
+                today.minusDays((dayOfWeek - DayOfWeek.MONDAY.value).toLong()).format(formatter)
+            val endOfWeek =
+                today.plusDays((DayOfWeek.SUNDAY.value - dayOfWeek).toLong()).format(formatter)
+
+            viewModelScope.launch {
+                fetchSolvedCountByDateRange(startOfWeek, endOfWeek)
+            }
+        }
+
+        private suspend fun fetchSolvedCountByDateRange(startDate: String, endDate: String) {
+            val count = recordRepository.fetchSolvedCountByDateRange(startDate, endDate)
+            _state.update { it.copy(weeklySolvedCount = count) }
+        }
+
         companion object {
             private const val TAG = "HomeViewModel"
+            private const val DATE_FORMAT = "yyyy.MM.dd"
+
+            private val formatter = DateTimeFormatter.ofPattern(DATE_FORMAT)
         }
     }

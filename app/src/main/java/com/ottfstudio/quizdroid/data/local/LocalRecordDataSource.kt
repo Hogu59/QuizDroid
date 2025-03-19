@@ -29,6 +29,10 @@ class LocalRecordDataSource
             return recordDao.fetchTotalCorrectCount()
         }
 
+        override suspend fun fetchSolvedCountByDateRange(startDate: String, endDate: String): Int {
+            return recordDao.fetchSolvedCountByDateRange(startDate, endDate)
+        }
+
         override suspend fun insertQuizRecord(quizRecord: QuizRecord) {
             recordDao.insertQuizRecord(quizRecord)
         }

@@ -62,6 +62,10 @@ class LocalRecordRepository
             return recordDataSource.fetchTotalCorrectCount()
         }
 
+        override suspend fun fetchSolvedCountByDateRange(startDate: String, endDate: String): Int {
+            return recordDataSource.fetchSolvedCountByDateRange(startDate, endDate)
+        }
+
         private fun isConsecutiveDate(current: String, previous: String): Boolean {
             val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
 

@@ -11,6 +11,8 @@ interface RecordDataSource {
 
     suspend fun fetchTotalCorrectCount(): Int
 
+    suspend fun fetchSolvedCountByDateRange(startDate: String, endDate: String): Int
+
     suspend fun insertQuizRecord(
         quizRecord: QuizRecord,
     )

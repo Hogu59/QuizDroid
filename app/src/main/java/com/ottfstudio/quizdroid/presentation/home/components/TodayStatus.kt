@@ -38,7 +38,7 @@ fun TodayStatus(
     isSolved: Boolean,
 //    progress: Float,
 //    totalQuestions: Int,
-//    completedQuestions: Int,
+    solvedQuestions: Int,
     onNavigateToSettings: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -109,9 +109,9 @@ fun TodayStatus(
                             // progress = progress,
                             // total = totalQuestions,
                             // current = completedQuestions,
-                            progress = 3 / 7f,
+                            progress = solvedQuestions / 7f,
                             total = 7,
-                            current = 3,
+                            current = solvedQuestions,
                         )
                     }
                 }
@@ -127,5 +127,6 @@ private fun TodayStatusPreview() {
         date = "2025년 3월 10일",
         isSolved = false,
         onNavigateToSettings = {},
+        solvedQuestions = 3,
     )
 }

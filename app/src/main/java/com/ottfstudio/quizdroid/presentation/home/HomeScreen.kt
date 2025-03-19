@@ -68,6 +68,7 @@ fun HomeScreen(
                 date = quizState.today,
                 isSolved = quizState.isSolved,
                 onNavigateToSettings = { onAction(HomeAction.OnNavigateToSettings) },
+                solvedQuestions = state.weeklySolvedCount,
                 modifier = Modifier.shadow(
                     elevation = 8.dp,
                     shape = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp),

@@ -26,6 +26,9 @@ interface RecordDao {
     @Query("SELECT * FROM quiz_record WHERE date = :date")
     suspend fun fetchQuizRecordByDate(date: String): QuizRecord?
 
+    @Query("SELECT COUNT(*) FROM quiz_record WHERE date BETWEEN :startDate AND :endDate")
+    suspend fun fetchSolvedCountByDateRange(startDate: String, endDate: String): Int
+
     @Query("DELETE FROM quiz_record WHERE date = :date")
     suspend fun deleteQuizRecordByDate(date: String)
 }

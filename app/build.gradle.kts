@@ -155,7 +155,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.play.services.oss.licenses)
 
-    // Firebase
+    // Firebase Crashlytics & Analytics
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.analytics)

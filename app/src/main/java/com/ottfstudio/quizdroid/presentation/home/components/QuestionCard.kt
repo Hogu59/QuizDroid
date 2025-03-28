@@ -29,9 +29,10 @@ import com.ottfstudio.quizdroid.ui.theme.CustomTypography
 
 @Composable
 fun QuestionCard(
-    quiz: Quiz = Quiz.EMPTY,
+    isEnable: Boolean,
     onChallenge: () -> Unit,
     modifier: Modifier = Modifier,
+    quiz: Quiz = Quiz.EMPTY,
 ) {
     Card(
         modifier = modifier
@@ -97,12 +98,13 @@ fun QuestionCard(
                     )
 
                     Button(
+                        enabled = isEnable,
                         onClick = { onChallenge() },
                         colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+                        shape = RoundedCornerShape(8.dp),
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 12.dp),
-                        shape = RoundedCornerShape(8.dp),
                     ) {
                         Text(
                             text = stringResource(R.string.solve_problems),
@@ -121,6 +123,7 @@ fun QuestionCard(
 private fun QuestionCardPreview() {
     QuestionCard(
         quiz = Quiz.EMPTY,
+        isEnable = true,
         onChallenge = { /* TODO: 문제 풀기 액션 */ },
     )
 }

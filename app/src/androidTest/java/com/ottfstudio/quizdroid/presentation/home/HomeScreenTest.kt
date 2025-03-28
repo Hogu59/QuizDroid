@@ -6,6 +6,9 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.ottfstudio.quizdroid.presentation.quiz.QuizState
+import junit.framework.Assert.assertEquals
+import junit.framework.Assert.assertNotNull
+import junit.framework.Assert.assertNull
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -36,7 +39,7 @@ class HomeScreenTest {
         // Then
         composeTestRule.onNodeWithText("문제 풀기").assertIsDisplayed()
         composeTestRule.onNodeWithText("문제 풀기").performClick()
-        assert(action == null)
+        assertNull(action)
     }
 
     @Test
@@ -60,7 +63,7 @@ class HomeScreenTest {
         // Then
         composeTestRule.onNodeWithText("문제 풀기").assertIsDisplayed()
         composeTestRule.onNodeWithText("문제 풀기").performClick()
-        assert(action != null)
-        assert(action == HomeAction.OnNavigateToQuiz)
+        assertNotNull(action)
+        assertEquals(HomeAction.OnNavigateToQuiz, action)
     }
 }

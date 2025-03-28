@@ -124,6 +124,6 @@ private fun QuestionCardPreview() {
     QuestionCard(
         quiz = Quiz.EMPTY,
         isEnable = true,
-        onChallenge = { /* TODO: 문제 풀기 액션 */ },
+        onChallenge = { },
     )
 }

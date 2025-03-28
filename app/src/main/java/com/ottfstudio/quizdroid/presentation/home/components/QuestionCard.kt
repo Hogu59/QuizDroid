@@ -29,10 +29,10 @@ import com.ottfstudio.quizdroid.ui.theme.CustomTypography
 
 @Composable
 fun QuestionCard(
+    quiz: Quiz,
     isEnable: Boolean,
     onChallenge: () -> Unit,
     modifier: Modifier = Modifier,
-    quiz: Quiz = Quiz.EMPTY,
 ) {
     Card(
         modifier = modifier

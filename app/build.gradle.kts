@@ -28,8 +28,8 @@ android {
         applicationId = "com.ottfstudio.quizdroid"
         minSdk = 28
         targetSdk = 35
-        versionCode = 3
-        versionName = "0.0.1"
+        versionCode = 4
+        versionName = "0.0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -115,8 +115,13 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose.android)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.junit.ktx)
+    implementation(libs.androidx.compose.material.core)
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter.api)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockk)
+    androidTestImplementation(libs.mockk.android)
+    testImplementation(libs.robolectric)
     testImplementation(libs.androidx.core)
     testImplementation(libs.androidx.junit)
     testImplementation(libs.assertj.core)
@@ -159,4 +164,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.analytics)
+
+    // WorkManager
+    implementation(libs.androidx.work.runtime.ktx)
 }

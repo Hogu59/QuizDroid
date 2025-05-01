@@ -69,9 +69,6 @@ class AlarmScheduler(
         }
     }
 
-    /***
-     * param
-     */
     companion object {
         const val ALARM_REQUEST_CODE = 20250501
     }

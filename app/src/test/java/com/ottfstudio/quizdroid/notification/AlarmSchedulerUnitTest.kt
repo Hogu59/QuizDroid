@@ -9,6 +9,7 @@ import io.mockk.mockk
 import io.mockk.mockkStatic
 import io.mockk.slot
 import io.mockk.verify
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -59,7 +60,14 @@ class AlarmSchedulerUnitTest {
         verify {
             alarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP,
-                any(),
+                withArg { timeMillis ->
+                    val calendar = Calendar.getInstance().apply {
+                        timeInMillis = timeMillis
+                    }
+                    val hour = calendar.get(Calendar.HOUR_OF_DAY)
+                    val minute = calendar.get(Calendar.MINUTE)
+                    assertTrue(hour == 10 && minute == 0)
+                },
                 mockPendingIntent,
             )
         }
@@ -79,9 +87,31 @@ class AlarmSchedulerUnitTest {
         verify {
             alarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP,
-                any(),
+                withArg { timeMillis ->
+                    val calendar = Calendar.getInstance().apply {
+                        timeInMillis = timeMillis
+                    }
+                    val hour = calendar.get(Calendar.HOUR_OF_DAY)
+                    val minute = calendar.get(Calendar.MINUTE)
+                    assertTrue(hour == 10 && minute == 0)
+                },
                 mockPendingIntent,
             )
         }
+    }
+
+    @Test
+    fun `when exception occurs returns false`() {
+        every {
+            alarmManager.setExactAndAllowWhileIdle(
+                any(),
+                any(),
+                any(),
+            )
+        } throws RuntimeException("테스트 예외")
+
+        val result = scheduler.scheduleDailyAlarm(context)
+
+        assertFalse(result)
     }
 }

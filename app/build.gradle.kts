@@ -118,7 +118,6 @@ dependencies {
     implementation(libs.androidx.compose.material.core)
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter.api)
-    testImplementation(libs.mockito.core)
     testImplementation(libs.mockk)
     androidTestImplementation(libs.mockk.android)
     testImplementation(libs.robolectric)

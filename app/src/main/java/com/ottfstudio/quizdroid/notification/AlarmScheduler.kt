@@ -10,6 +10,9 @@ import java.util.Calendar
 class AlarmScheduler(
     private val timeProvider: () -> Long = { System.currentTimeMillis() },
 ) {
+    /** 반환값은 정확한 알람이 설정되었는지 여부를 나타냅니다.
+     * @return true: 정확한 알람 설정 성공, false: 정확하지 않은 알람 설정 또는 설정 실패
+     */
     fun scheduleDailyAlarm(context: Context): Boolean {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
@@ -66,6 +69,9 @@ class AlarmScheduler(
         }
     }
 
+    /***
+     * param
+     */
     companion object {
         const val ALARM_REQUEST_CODE = 20250501
     }

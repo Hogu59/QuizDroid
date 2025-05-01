@@ -27,14 +27,7 @@ class AlarmSchedulerRobolectricTest {
 
     @Test
     fun `before 10am schedules today at 10am`() {
-        val calendar = Calendar.getInstance().apply {
-            set(2025, Calendar.MAY, 1, 9, 0, 0)
-            set(Calendar.MILLISECOND, 0)
-        }
-        SystemClock.setCurrentTimeMillis(calendar.timeInMillis)
-
-        val fixedTime = calendar.timeInMillis
-        val scheduler = AlarmScheduler(timeProvider = { fixedTime })
+        val (calendar, scheduler) = setupTestTime(9, 0)
 
         scheduler.scheduleDailyAlarm(context)
 
@@ -54,25 +47,14 @@ class AlarmSchedulerRobolectricTest {
 
     @Test
     fun `after 10am schedules tomorrow at 10am`() {
-        val calendar = Calendar.getInstance().apply {
-            set(2025, Calendar.MAY, 1, 11, 30, 0)
-            set(Calendar.MILLISECOND, 0)
-        }
-        SystemClock.setCurrentTimeMillis(calendar.timeInMillis)
-
-        val fixedTime = calendar.timeInMillis
-        val scheduler = AlarmScheduler(timeProvider = { fixedTime })
-
-        val shadow = shadowOf(alarmManager)
-        val alarmsBefore = shadow.scheduledAlarms
-        assertEquals(0, alarmsBefore.size)
-
+        val (calendar, scheduler) = setupTestTime(11, 0)
         scheduler.scheduleDailyAlarm(context)
 
+        val shadow = shadowOf(alarmManager)
         val alarms = shadow.scheduledAlarms
         assertEquals(1, alarms.size)
 
-        val calExp = Calendar.getInstance().apply {
+        val calendarExpect = Calendar.getInstance().apply {
             timeInMillis = calendar.timeInMillis
             add(Calendar.DAY_OF_MONTH, 1)
             set(Calendar.HOUR_OF_DAY, 10)
@@ -80,6 +62,20 @@ class AlarmSchedulerRobolectricTest {
             set(Calendar.SECOND, 0)
             set(Calendar.MILLISECOND, 0)
         }
-        assertEquals(calExp.timeInMillis, alarms[0].triggerAtMs)
+        assertEquals(calendarExpect.timeInMillis, alarms[0].triggerAtMs)
+    }
+
+    private fun setupTestTime(hour: Int, minute: Int): Pair<Calendar, AlarmScheduler> {
+        val calendar = Calendar.getInstance().apply {
+            set(2025, Calendar.MAY, 1, hour, minute, 0)
+            set(Calendar.MILLISECOND, 0)
+        }
+
+        SystemClock.setCurrentTimeMillis(calendar.timeInMillis)
+
+        val fixedTime = calendar.timeInMillis
+        val scheduler = AlarmScheduler(timeProvider = { fixedTime })
+
+        return calendar to scheduler
     }
 }

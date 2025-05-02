@@ -44,7 +44,7 @@ class DailyProblemNotificationWorker(
             .setAutoCancel(true)
 
         val intent = context.packageManager.getLaunchIntentForPackage(context.packageName)
-        if (intent == null) {
+        if (intent != null) {
             val pendingIntent = PendingIntent.getActivity(
                 context,
                 0,

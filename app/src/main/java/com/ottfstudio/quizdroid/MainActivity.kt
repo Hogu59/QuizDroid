@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -28,6 +29,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    private val alarmScheduler = AlarmScheduler()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -83,7 +86,11 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun setupDailyAlarm() {
-        AlarmScheduler().scheduleDailyAlarm(this)
+        val isExact = alarmScheduler.scheduleDailyAlarm(this)
+        if (!isExact) {
+            Toast.makeText(this, getString(R.string.toast_warning_notification), Toast.LENGTH_LONG).show()
+            alarmScheduler.getExactAlarmSettingsIntent()?.let { startActivity(it) }
+        }
     }
 
     private fun setupComposeUI() {

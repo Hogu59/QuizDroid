@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.provider.Settings
 import java.util.Calendar
 
 class AlarmScheduler(
@@ -14,10 +15,11 @@ class AlarmScheduler(
      * @return true: 정확한 알람 설정 성공, false: 정확하지 않은 알람 설정 또는 설정 실패
      */
     fun scheduleDailyAlarm(context: Context): Boolean {
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as? AlarmManager
+            ?: return false
 
         val intent = Intent(context, AlarmReceiver::class.java).apply {
-            putExtra("RESCHEDULE", true)
+            putExtra(EXTRA_RESCHEDULE, true)
         }
         val pendingIntent = PendingIntent.getBroadcast(
             context,
@@ -69,7 +71,16 @@ class AlarmScheduler(
         }
     }
 
+    fun getExactAlarmSettingsIntent(): Intent? {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
+        } else {
+            null
+        }
+    }
+
     companion object {
         const val ALARM_REQUEST_CODE = 20250501
+        const val EXTRA_RESCHEDULE = "RESCHEDULE"
     }
 }

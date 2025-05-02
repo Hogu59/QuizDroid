@@ -19,7 +19,7 @@ class AlarmReceiver : BroadcastReceiver() {
                 notificationWorkRequest,
             )
 
-        if (intent.getBooleanExtra("RESCHEDULE", false)) {
+        if (intent.getBooleanExtra(AlarmScheduler.EXTRA_RESCHEDULE, false)) {
             createAlarmScheduler().scheduleDailyAlarm(context)
         }
     }

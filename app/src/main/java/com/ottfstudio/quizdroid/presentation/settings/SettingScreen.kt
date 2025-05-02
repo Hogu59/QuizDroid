@@ -117,7 +117,7 @@ fun SettingsScreen(
                     Column {
                         SettingInfoItem(title = "현재 버전", value = BuildConfig.VERSION_NAME)
                         HorizontalDivider(thickness = 0.5.dp)
-                        SettingInfoItem(title = "최신 업데이트", value = "2025.02.27")
+                        SettingInfoItem(title = "최신 업데이트", value = "2025.05.01")
                     }
                 },
             )
